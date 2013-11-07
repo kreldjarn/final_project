@@ -1,2 +1,15 @@
 {% extends "flashcards/flashcards_base.html" %}
 {% block titill %}Skoða stokk{% endblock %}
+
+{% block meginmal %}
+<p>Test</p>
+{% for d in decks %}
+<p>{{ d.pk }}</p>
+{% endfor %}
+{% endblock %}
+
+{% block skriptur %}
+<script>
+  var decks = [{% for d in decks %}{ pk: '{{d.pk}}', name: '{{ i.name }}' }{% if forloop.last %} {% else %} , {% endif %}{% endfor %}];
+</script>
+{% endblock %}

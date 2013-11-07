@@ -1,11 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.base import View
 from flashcards.models import *
 
-def view_decks(request):
+class view_decks(View):
     template_name = "flashcards/view_decks.html"
-    decks = Deck.objects.all()
-    return render(request, template_name, locals())
+    def get(self, request):
+        decks = Deck.objects.all()
+        return render(request, self.template_name, locals())
 
-def deck_view(request, deck_id):
-    return HttpResponse("test %s", deck_id)
+class deck(View):
+    def get(self, request, deck_id):
+        return HttpResponse("test %s", deck_id)

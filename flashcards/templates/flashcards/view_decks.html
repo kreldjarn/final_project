@@ -1,9 +1,12 @@
 {% extends "flashcards/flashcards_base.html" %}
 {% block titill %}Skoða stokk{% endblock %}
 
+{% block meginmal %}
+<p>Test</p>
 {% for d in decks %}
 <p>{{ d.name }}</p>
 {% endfor %}
+{% endblock %}
 
 {% block skriptur %}
 <script>
