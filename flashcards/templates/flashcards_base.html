@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <title>{% block titill %}Grunnsíða{% endblock %}</title>
+  <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  <nav>
+    <p>Navbar</p>
+    <a class="button" href="#">Hlekkur</a>
+    <a class="button" href="#">Tengill</a>
+    <a class="button" href="#">Hnappur</a>
+  </nav>
+
+  {% block efni %}<p>Ekkert efni til staðar</p>{% endblock %}
+</body>
+{% block skriptur %}{% endblock %}
+</html>

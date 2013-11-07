@@ -2,5 +2,6 @@ from django.conf.urls import patterns, url
 from flashcards import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index')
+    url(r'^$', views.index, name='index'),
+    url(r'^(?P<deck_id>\d+)/$', views.deck_view, name='deck_view'),
 )
