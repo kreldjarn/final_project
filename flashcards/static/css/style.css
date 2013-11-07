@@ -1,0 +1,21 @@
+*{
+	font-family: 'Fauna One', Helvetica;
+}
+
+a{
+	text-decoration: none;
+	color: #A32B68;
+	padding: 5px;
+}
+
+a:hover{
+	background-color: #FD0B58;
+	color: #FFF;
+	box-shadow: 1px 1px 5px #BA6892;
+}
+
+#menu{
+	margin: 0;
+	padding: 5px;
+	background-color: #FFF;
+}

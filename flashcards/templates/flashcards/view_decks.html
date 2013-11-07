@@ -2,10 +2,12 @@
 {% block titill %}Skoða stokk{% endblock %}
 
 {% block meginmal %}
-<p>Test</p>
-{% for d in decks %}
-<p>{{ d.name }}</p>
-{% endfor %}
+<select id="selectDeck">
+  <option>Veldu bunka</option>
+  {% for d in decks %}
+  <option value="{{ d.id }}">{{ d.name }}</option>
+  {% endfor %}
+</select>
 {% endblock %}
 
 {% block skriptur %}
