@@ -1,0 +1,133 @@
+body
+{
+	font-family: "Helvetica";
+	min-width: 1120px;	
+}
+
+#wrap
+{
+	margin: 50px auto;
+	width: 1020px;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#stacks
+{
+	width: 188px;
+	margin: 0px 20px 0px 0px;
+	float: left;
+}
+
+#main
+{
+	float: left;
+	width: 604px;
+	margin: 0 20px 0 0;
+}
+
+	#main #options
+	{
+		-webkit-user-select: none;
+	}
+
+		#main #options ul
+		{
+
+			text-align: center;
+			list-style: none;
+			margin: 0px auto;
+			padding: 0px;
+			display: table;
+			-webkit-user-select: inherit;
+
+		}
+			#main #options ul li
+			{
+				font-size: 2.2em;
+				margin: 0 20px 0 0;
+				display: inline-block;
+				border: 4px solid #ccc;
+				width: 70px;
+				height: 50px;
+				text-align: center;
+				vertical-align: top;
+				line-height: 1.5em;
+				border-radius: 6px;
+				color: #999;
+				cursor: pointer;
+			}
+
+
+				#main #options ul li:hover
+				{
+				}
+
+				#main #options ul li:active
+				{
+				}
+
+				#main #options ul li:last-child
+				{
+					margin-right: 0;
+				}
+
+#right
+{
+	width: 188px;
+	float: left;
+}
+
+.card
+{
+	display: block;
+	width: 396px;
+	height: 190px;
+	margin: 40px auto;
+	position: relative;
+	font-size: 1.5em;
+}
+
+	.card #front, .card #back
+	{
+		z-index: 2;
+		background: #FFF;
+		width: calc(100% - 80px);
+		height: calc(100% - 80px);
+		text-align: center;
+		padding: 40px;
+		-webkit-transition: 0.5s all ease-in;
+		opacity: 1;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+		border: 1px solid #ccc;
+	}
+
+	.card #back
+	{
+		position: absolute;
+		top: 0;
+		z-index: 1;
+	}
+
+	.card .flipped
+	{
+		-webkit-transform: rotateY(90deg) ;
+		opacity: 0 !important;
+		box-shadow: none !important;
+	}
+
+.clear
+{
+	clear: both;
+}
+
+h2
+{
+	font-weight: normal;
+	margin: 10px	;
+	color: #666;
+	font-size: 1em;
+	text-transform: uppercase;
+	text-align: center;
+}
