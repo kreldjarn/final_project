@@ -12,9 +12,17 @@
 <h1>{{ deck.name }}</h1>
 <ul>
   {% for c in cards %}
-  <li id="{{ c.id }}">
-    {{ c.question }}
-  </li>
+  <div class="flip" id="{{ c.id }}">
+    <div class="card"> 
+      <div class="face front"> 
+	{{ c.question }}
+      </div> 
+      <div class="face back"> 
+	{{ c.answer }}
+      </div>
+    </div> 
+  </div> 
+  <!--<li class="card" id="{{ c.id }}">{{ c.question }}</li>-->
   {% endfor %}
 </ul>
 {% endblock %}
@@ -24,8 +32,8 @@
   var deck = {};
   deck.id = '{{ deck.id }}';
   deck.name = '{{ deck.name }}';
-
   var cards = [{% for c in cards %}{ id: '{{ c.pk }}', question: '{{ c.question }}', answer: '{{ c.answer }}'}{% if forloop.last %} {% else %},{% endif %} {% endfor %}];
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/selectDeck.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/view_single_deck.js"></script>
 {% endblock %}
