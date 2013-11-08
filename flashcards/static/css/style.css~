@@ -2,15 +2,31 @@
 	font-family: 'Fauna One', Helvetica;
 }
 
+ul{
+	list-style-type: none;
+	padding: 0;
+}
+
 a{
 	text-decoration: none;
 	color: #A32B68;
+	padding: 5px;
 }
 
 a:hover{
-	color: #FD0B58;
+	background-color: #FD0B58;
+	color: #FFF;
+	box-shadow: 1px 1px 5px #BA6892;
+}
+
+h1{
+	background: -webkit-linear-gradient(top,#fd0b58 0,#a32b68 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 #menu{
-	background-color: #79718F;
+	margin: 0;
+	padding: 5px;
+	background-color: #FFF;
 }

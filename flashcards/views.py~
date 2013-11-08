@@ -9,5 +9,6 @@ class view_decks(View):
         decks = Deck.objects.all()
         return render(request, self.template_name, locals())
 
-def deck_view(request, deck_id):
-    return HttpResponse("test %s", deck_id)
+class deck(View):
+    def get(self, request, deck_id):
+        return HttpResponse("test %s", deck_id)

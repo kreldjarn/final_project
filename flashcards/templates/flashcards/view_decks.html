@@ -12,6 +12,8 @@
 
 {% block skriptur %}
 <script>
+  var deck = null;
   var decks = [{% for d in decks %}{ pk: '{{d.pk}}', name: '{{ i.name }}' }{% if forloop.last %} {% else %} , {% endif %}{% endfor %}];
 </script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/selectDeck.js"></script>
 {% endblock %}

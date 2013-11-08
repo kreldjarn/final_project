@@ -2,6 +2,12 @@
 	font-family: 'Fauna One', Helvetica;
 }
 
+ul{
+	list-style-type: none;
+	padding: 0;
+	color: #777;
+}
+
 a{
 	text-decoration: none;
 	color: #A32B68;
@@ -12,6 +18,12 @@ a:hover{
 	background-color: #FD0B58;
 	color: #FFF;
 	box-shadow: 1px 1px 5px #BA6892;
+}
+
+h1{
+	background: -webkit-linear-gradient(top,#fd0b58 0,#a32b68 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 #menu{

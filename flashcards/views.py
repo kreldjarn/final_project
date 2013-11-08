@@ -10,5 +10,9 @@ class view_decks(View):
         return render(request, self.template_name, locals())
 
 class deck(View):
+    template_name = "flashcards/view_single_deck.html"
     def get(self, request, deck_id):
-        return HttpResponse("test %s", deck_id)
+        decks = Deck.objects.all()
+        cards = Card.objects.filter(deck=deck_id)
+        deck = Deck.objects.get(pk=deck_id)
+        return render(request, self.template_name, locals())

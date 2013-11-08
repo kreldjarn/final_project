@@ -1,0 +1,6 @@
+$('#selectDeck').change(function(){
+	if ($(this).val() == "Veldu bunka") return;
+	window.location = "/" + $(this).val();
+});
+
+if (deck) $('select').val(deck.id);

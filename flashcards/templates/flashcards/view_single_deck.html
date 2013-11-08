@@ -1,0 +1,31 @@
+{% extends 'flashcards/flashcards_base.html' %}
+
+{% block title %}Stokkur: {{ deck.name }}{% endblock %}
+
+{% block meginmal %}
+<select id="selectDeck">
+  <option>Veldu bunka</option>
+  {% for d in decks %}
+  <option value="{{ d.id }}">{{ d.name }}</option>
+  {% endfor %}
+</select>
+<h1>{{ deck.name }}</h1>
+<ul>
+  {% for c in cards %}
+  <li id="{{ c.id }}">
+    {{ c.question }}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+{% block skriptur %}
+<script>
+  var deck = {};
+  deck.id = '{{ deck.id }}';
+  deck.name = '{{ deck.name }}';
+
+  var cards = [{% for c in cards %}{ id: '{{ c.pk }}', question: '{{ c.question }}', answer: '{{ c.answer }}'}{% if forloop.last %} {% else %},{% endif %} {% endfor %}];
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/selectDeck.js"></script>
+{% endblock %}
