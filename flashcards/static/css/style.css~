@@ -58,15 +58,15 @@ h1{
       position: absolute;
       -webkit-backface-visibility: hidden;
       z-index: 2;
-      font-size: 3em;
+      font-size: 2.5em;
       text-align: center;
       line-height: 200px;
 }
 .flip .card .front {
       position: absolute;
       z-index: 1;
-      background: black;
-      color: white;
+      background: #333;
+      color: #FFF;
       cursor: pointer;
 }
 .flip .card .back {
