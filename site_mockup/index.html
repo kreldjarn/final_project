@@ -9,22 +9,52 @@
 		<section id="wrap">
 			<section id="stacks">
 				<h2>Staflar</h2>
+				<ul class="stack">
+					<li class="stack-card n0">
+					</li>
+					<li class="stack-card n1">
+					</li>
+					<li class="stack-card n2">
+					</li>
+					<li class="stack-card n3">
+					</li>
+					<li class="name">
+						Húsdýr
+					</li>
+				</ul>
+				<ul class="stack">
+					<li class="stack-card n0">
+					</li>
+					<li class="stack-card n1">
+					</li>
+					<li class="stack-card n2">
+					</li>
+					<li class="stack-card n3">
+					</li>
+					<li class="name">
+						Höfuðborgir
+					</li>
+				</ul>
 			</section>
 			<section id="main">
 				<section id="options">
-					<ul>
-						<li id="flip">↺</li>
-						<li id="next">→</li>
-						<div class="clear"></div>
-					</ul>
+					<button id="flip">↺</button>
+					<button id="next">→</button>
+					<div class="clear"></div>
 				</section>
 				<section id="cards">
-					<div class="card">
-						<div id="front">
-							Hvað <u>eru</u> fuglar?
-						</div>
-						<div id="back" class="flipped">
-							Við vitum það ekki …
+					<div class="container">
+						<div class="card">
+							<div class="face front">
+								Hvað <u>eru</u> fuglar?
+							</div>
+							<div class="face back">
+								Við vitum það ekki …
+								<div class="answer">
+									<button id="wrong" class="small red">✗</button>
+									<button id="correct" class="small green">✓</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -35,23 +65,7 @@
 			<div class="clear"></div>
 		</section>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script>
-		var flip_button = $("li#flip");
-		var front = $("#front");
-		var back = $("#back");
-
-		flip_button.on('click', function (e) {
-			if(!front.hasClass('flipped'))
-			{
-				front.addClass('flipped');
-				back.removeClass('flipped');
-			}
-			else
-			{
-				front.removeClass('flipped');
-				back.addClass('flipped');
-			}
-		});
+		<script src="script.js">
 		</script>
 	</body>
 </html>
