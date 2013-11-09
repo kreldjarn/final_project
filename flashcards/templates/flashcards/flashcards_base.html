@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="utf-8">
+  <title>{% block titill %}Grunnsíða{% endblock %}</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% block utlit %}{% endblock %}
+</head>
+
+<body>
+  <nav id="menu">
+    <a class="button" href="/">Skoða stokk</a>
+    <a class="button" href="/">Smíða stokk</a>
+  </nav>
+
+  {% block meginmal %}Ekkert efni til staðar{% endblock %}
+</body>
+{% block skriptur %}{% endblock %}
+</html>
