@@ -1,0 +1,16 @@
+{% extends "flashcards/flashcards_base.html" %}
+{% block titill %}Smíða nýjan stafla{% endblock %}
+
+
+{% block meginmal %}
+<article id="content">
+  <form id="nyr_stafli" action="/nyrstafli/" method="post">
+    <input type="text" placeholder="Nafn stafla" id="nafn" name="nafn" autofocus />
+    <input type="Submit" value="Smíða stafla" />
+  </form>
+
+  <form id="ny_spjold" type="hidden" action="/nyspjold/" method="post">
+    <input id="spjold" type="hidden" value="" name="spjold" />
+  </form>
+</article>
+{% endblock %}

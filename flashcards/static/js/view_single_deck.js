@@ -6,6 +6,13 @@ $('.flip').click(function(){
 });
 
 
+$('.ans').click(function(){
+    var id = $(this).attr('id');
+    var card_id = id.match(/\d+$/)[0];
+    var ans_value = id.substring(0, id.indexOf(card_id));
+    $.ajax({ url: "/" + card_id + "/" + ans_value + "/" });
+});
+
 $('.card').click(function()
 {
     var id = $(this).attr('id');
