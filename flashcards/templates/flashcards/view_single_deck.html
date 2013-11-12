@@ -3,33 +3,50 @@
 {% block title %}Stokkur: {{ deck.name }}{% endblock %}
 
 {% block meginmal %}
-<select id="selectDeck">
-  <option>Veldu bunka</option>
+<section id="stacks">
+        <h2>Staflar</h2>
   {% for d in decks %}
-  <option value="{{ d.id }}">{{ d.name }}</option>
+        <ul class="stack" id="{{ d.id }}">
+          <li class="stack-card n0">
+          </li>
+          <li class="stack-card n1">
+          </li>
+          <li class="stack-card n2">
+          </li>
+          <li class="stack-card n3">
+          </li>
+          <li class="name">
+            {{ d.name }}
+          </li>
+        </ul>
   {% endfor %}
-</select>
-<article id="container">
-<h1>{{ deck.name }}</h1>
-<ul>
-  {% for c in cards %}
-  <div class="flip" id="{{ c.id }}">
-    <div class="card"> 
-      <div class="face front"> 
-	{{ c.question }}
-      </div> 
-      <div class="face back"> 
-	{{ c.answer }}
-	<div class="buttonContainer">
-	  <a class="ans wrongButton" id="rangt{{ c.id }}">Rangt</a>
-	  <a class="ans rightButton" id="rett{{ c.id }}">Rétt</a>
-	</div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</ul>
-</article>
+</section>
+
+<section id="main">
+  <h1>{{ deck.name }}</h1>
+  <ul>
+    <section id="cards">
+    {% for c in cards %}
+      <div class="container">
+        <div class="card">
+          <div class="face front"> 
+    	{{ c.question }}
+          </div> 
+          <div class="face back"> 
+    	{{ c.answer }}
+            <div class="answer">
+              <button id="rangt" class="small red">✗</button>
+              <button id="rett" class="small green">✓</button>
+            </div>
+          </div>
+        </div>
+      </div>    {% endfor %}
+    </section>
+  </ul>
+</section>
+<section id="right">
+  <h2>Hliðarspalti</h2>
+</section>
 {% endblock %}
 
 {% block skriptur %}

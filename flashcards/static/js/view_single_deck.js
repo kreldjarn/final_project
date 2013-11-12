@@ -1,7 +1,7 @@
-$('.flip').click(function(){
-	$(this).find('.card').addClass('flipped').mouseleave(function(){
-		$(this).removeClass('flipped');
-	});
+$('.card').click( function(e){
+    $(this).toggleClass('flip');
+    e.stopDelegation();
+
         return false;
 });
 

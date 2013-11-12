@@ -3,10 +3,10 @@
 <html lang="is">
 <head>
   <meta charset="utf-8">
-  <title>{% block titill %}Grunnsíða{% endblock %}</title>
+  <title>{% block titill %}staf.li{% endblock %}</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
   <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
-  <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link type="text/css" rel="stylesheet" href="{% static 'css/layout-style.css' %}" />
   {% block utlit %}{% endblock %}
 </head>
 
@@ -16,7 +16,9 @@
     <a class="button" href="/">Smíða stokk</a>
   </nav>
 
+  <section id="wrap">
   {% block meginmal %}Ekkert efni til staðar{% endblock %}
+  </section>
 </body>
 {% block skriptur %}{% endblock %}
 </html>
