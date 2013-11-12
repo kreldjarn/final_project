@@ -1,0 +1,15 @@
+$('.card').click(function()
+{
+    var id = $(this).attr('id');
+    var index;
+    for(var i = 0; i < cards.length; i++) {
+	if (cards[i].id === id) {
+	    index = i;
+	    break;
+	}
+    }
+    if ($(this).html() == cards[index].question)
+	$(this).html(cards[index].answer);
+    else
+	$(this).html(cards[index].question);
+});

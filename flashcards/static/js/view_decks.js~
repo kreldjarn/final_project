@@ -1,0 +1,6 @@
+$(document).ready(function() {
+	$('#selectDeck select').change(function(){
+		console.log("typpi");
+		window.location = "/" + $(this).val();
+	});
+});
