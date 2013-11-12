@@ -9,6 +9,7 @@
   <option value="{{ d.id }}">{{ d.name }}</option>
   {% endfor %}
 </select>
+<article id="container">
 <h1>{{ deck.name }}</h1>
 <ul>
   {% for c in cards %}
@@ -19,11 +20,16 @@
       </div> 
       <div class="face back"> 
 	{{ c.answer }}
+	<div class="buttonContainer">
+	  <a class="ans wrongButton" id="rangt{{ c.id }}">Rangt</a>
+	  <a class="ans rightButton" id="rett{{ c.id }}">Rétt</a>
+	</div>
       </div>
-    </div> 
-  </div> 
+    </div>
+  </div>
   {% endfor %}
 </ul>
+</article>
 {% endblock %}
 
 {% block skriptur %}
