@@ -13,7 +13,7 @@
 <body>
   <nav id="menu">
     <a class="button" href="/">Skoða stokk</a>
-    <a class="button" href="#">Smíða stokk</a>
+    <a class="button" href="/">Smíða stokk</a>
   </nav>
 
   {% block meginmal %}Ekkert efni til staðar{% endblock %}
