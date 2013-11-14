@@ -1,6 +1,6 @@
 body
 {
-	font-family: "Helvetica";
+	font-family: 'Helvetica';
 	min-width: 1120px;	
 }
 
@@ -39,10 +39,9 @@ body
 		height: 59px;
 		position: absolute;
 		margin-top: -10px;
-		background: #fff;
 
-		-webkit-transform-origin: 50% 100%;
-		-webkit-transform: perspective(40px) rotateX(22deg);
+		/*-webkit-transform-origin: 50% 100%;
+		-webkit-transform: perspective(40px) rotateX(22deg);*/
 	}
 
 		#stacks ul.stack li.stack-card.n0
@@ -141,17 +140,11 @@ body
 				{
 				}
 
-				button:last-child
-				{
-					margin-right: 0;
-				}
-
 #right
 {
 	width: 188px;
 	float: left;
 }
-
 
 #cards .container
 {
@@ -165,7 +158,6 @@ body
 	width: 396px;
 	height: 220px;
 }
-
 
 .card
 {
@@ -230,7 +222,6 @@ h1
 	font-size: 1em;
 	text-transform: uppercase;
 	text-align: center;
-
 }
 
 h2

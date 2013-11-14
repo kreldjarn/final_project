@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from .views import view_decks, deck, right, wrong, create_deck, create_cards
+from .views import view_decks, deck, create_deck, create_cards
 
 urlpatterns = patterns('',
     url(r'^$', view_decks.as_view(), name='index'),

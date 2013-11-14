@@ -1,8 +1,15 @@
 {% extends "flashcards/flashcards_base.html" %}
 
 {% block meginmal %}
-<article id="content">
+<section id="main">
 	<h1>Spjöld í staflanum {{ currentDeck.name }}</h1>
+
+	<form id="nytt_spjald" name="nytt_spjald">
+		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autofocus />
+		<input type="text" placeholder="Svar" id="svar" name="svar" />
+		<input type="Submit" value="Búa til spjald" />
+	</form>
+	
 	<ul id="tilbuin_spjold">
 		{% for c in cards %}
 			<li id="{{ c.id }}">
@@ -11,18 +18,12 @@
 			</li>
 		{% endfor %}
 	</ul>
-	<!-- POST-aðferðin okkar appendar tilbúnum spjöldum við listann að ofan -->
-	<form id="nytt_spjald" name="nytt_spjald">
-		<input type="text" placeholder="Spurning" id="spurning" name="spurning" autofocus />
-		<input type="text" placeholder="Svar" id="svar" name="svar" />
-		<input type="Submit" value="Búa til spjald" />
-	</form>
-
+	
 	<form type="hidden" id="hidden" name="hidden">
 		{% csrf_token %}
 		<input id="spjald" type="hidden" value="" name="spjald" />
 	</form>
-<article>
+</section>
 {% endblock %}
 
 {% block skriptur %}

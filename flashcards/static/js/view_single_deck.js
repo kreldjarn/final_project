@@ -1,23 +1,24 @@
-$('.card').click( function(e){
-    $(this).toggleClass('flip');
-    e.stopDelegation();
+var top_el = $("#cards");
 
-        return false;
+top_el.delegate(".card", "click", function (e) {
+    $(this).toggleClass("flip");
 });
 
+top_el.delegate(".answer button", "click", function(e) {
+    e.stopPropagation();
 
-$('.ans').click(function(){
-    var id = $(this).attr('id');
-    var card_id = id.match(/\d+$/)[0];
-    var ans_value = id.substring(0, id.indexOf(card_id));
+    var card_el = $(this).parent().parent().parent().parent();
+    var card_id = card_el.attr('id');
+    var ans_value = $(this).attr('data-id');
 
     $("#svar").val(ans_value);
-    console.log($("#svar").val());
+
     $.ajax({
         type: "POST",
         url: "/" + card_id + "/",
         data: $("#hidden").serialize(),
         success: function() {
+            updateCardView(card_el, ans_value);
             console.log("Jibbí!");
         },
         error: function() {
@@ -26,14 +27,23 @@ $('.ans').click(function(){
     });
 });
 
-$('.card').click(function()
+function updateCardView(card_el, ans_value)
 {
-    var id = $(this).attr('id');
-    var index;
-    for(var i = 0; i < cards.length; i++) {
-	if (cards[i].id === id) {
-	    index = i;
-	    break;
-	}
+    var cards_top_el = $("section#cards");
+    card_el.remove();
+
+    if(ans_value === "rangt")
+    {
+        card_el.find(".card").removeClass("flip");
+        cards_top_el.append(card_el);
     }
-});
+}
+
+function updateCardEvents()
+{
+    $('.card').click( function(e) {
+        $(this).toggleClass('flip');
+        e.stopPropagation();
+        return false;
+    });
+}

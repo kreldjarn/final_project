@@ -17,7 +17,16 @@
   </nav>
 
   <section id="wrap">
-  {% block meginmal %}Ekkert efni til staðar{% endblock %}
+    <section id="stacks">
+      <h2>Staflar</h2>
+      {% block stacks %} {% endblock %}
+    </section>
+    <section id="main">
+      {% block meginmal %}Ekkert efni til staðar{% endblock %}
+    </section>
+    <section id="right">
+      {% block right %} {% endblock %}
+    </section>
   </section>
 </body>
 {% block skriptur %}{% endblock %}
