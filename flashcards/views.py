@@ -21,16 +21,13 @@ class deck(View):
         time = timezone.now()
         return render(request, self.template_name, locals())
 
-def right(request, card_id):
+    def post(self, request, deck_id):
+        card_id = deck_id
         card = Card.objects.get(pk=card_id)
         card.asked += 1
-        card.save()
-        return HttpResponse()
-
-def wrong(request, card_id):
-        card = Card.objects.get(pk=card_id)
-        card.asked += 1
-        card.wrong += 1
+        ans = request.POST.get("svar")
+        if (ans == "rangt"):
+            card.wrong +=1
         card.save()
         return HttpResponse()
 

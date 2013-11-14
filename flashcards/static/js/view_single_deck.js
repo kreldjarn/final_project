@@ -10,7 +10,20 @@ $('.ans').click(function(){
     var id = $(this).attr('id');
     var card_id = id.match(/\d+$/)[0];
     var ans_value = id.substring(0, id.indexOf(card_id));
-    $.ajax({ url: "/" + card_id + "/" + ans_value + "/" });
+
+    $("#svar").val(ans_value);
+    console.log($("#svar").val());
+    $.ajax({
+        type: "POST",
+        url: "/" + card_id + "/",
+        data: $("#hidden").serialize(),
+        success: function() {
+            console.log("Jibbí!");
+        },
+        error: function() {
+            console.log("Jabbú!");
+        }
+    });
 });
 
 $('.card').click(function()

@@ -28,7 +28,7 @@
     <section id="cards">
     {% for c in cards %}
       <div class="container">
-        <div class="card">
+        <div class="card" id="{{ c.id }}">
           <div class="face front"> 
     	{{ c.question }}
           </div> 
