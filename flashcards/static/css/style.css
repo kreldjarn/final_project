@@ -1,0 +1,112 @@
+*{
+	font-family: 'Fauna One', Helvetica;
+}
+
+ul{
+	list-style-type: none;
+	padding: 0;
+	color: #777;
+}
+
+li{
+	cursor: pointer;
+}
+
+a{
+	text-decoration: none;
+	color: #A32B68;
+	padding: 5px;
+	cursor: pointer;
+}
+
+a:hover{
+	background-color: #FD0B58;
+	color: #FFF;
+	box-shadow: 1px 1px 5px #BA6892;
+}
+
+.wrongButton{
+	font-size: 15px;
+	line-height: 15px;
+	width: 60px;
+	text-align: center;
+	display: inline-block;
+}
+
+.rightButton{
+	font-size: 15px;
+	line-height: 15px;
+	width: 60px;
+	text-align: center;
+	display: inline-block;
+	color: #298F75;
+}
+
+.rightButton:hover{
+	background-color: #35B897;
+	box-shadow: 1px 1px 5px #24735F;
+	color: #FFF;
+}
+
+#container{
+	width: 500px;
+	margin: auto;
+}
+
+.buttonContainer{
+	width: 170px;
+	margin: auto;
+}
+
+h1{
+	background: -webkit-linear-gradient(top,#fd0b58 0,#a32b68 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+#menu{
+	margin: 0;
+	padding: 5px;
+	background-color: #FFF;
+}
+
+.flip {
+      -webkit-perspective: 800;
+      width: 400px;
+      height: 200px;
+      position: relative;
+      margin: 10px auto;
+}
+.flip .card.flipped {
+      -webkit-transform: rotatey(-180deg);
+}
+.flip .card {
+      width: 100%;
+      height: 100%;
+      -webkit-transform-style: preserve-3d;
+      -webkit-transition: 0.4s;
+}
+.flip .card .face {
+      width: 100%;
+      height: 55%;
+      position: absolute;
+      -webkit-backface-visibility: hidden;
+      z-index: 2;
+      font-size: 2.5em;
+      text-align: center;
+      padding-top: 85px;
+      line-height: 20px;
+}
+.flip .card .front {
+      position: absolute;
+      z-index: 1;
+      background: #333;
+      color: #FFF;
+      cursor: pointer;
+}
+.flip .card .back {
+      -webkit-transform: rotatey(-180deg);
+      background: #DDD;
+      color: #A32B68;
+      cursor: pointer;
+}

@@ -4,7 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^leifturspjold/', include('flashcards.urls')),
+    url(r'', include('flashcards.urls')),
     
     url(r'^admin/', include(admin.site.urls)),
 )

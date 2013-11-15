@@ -1,0 +1,65 @@
+{% extends 'flashcards/flashcards_base.html' %}
+
+{% block title %}Stokkur: {{ deck.name }}{% endblock %}
+
+{% block stacks %}
+  {% for d in decks %}
+    <ul class="stack" id="{{ d.id }}">
+      <li class="stack-card n0">
+      </li>
+      <li class="stack-card n1">
+      </li>
+      <li class="stack-card n2">
+      </li>
+      <li class="stack-card n3">
+      </li>
+      <li class="name">
+        {{ d.name }}
+      </li>
+    </ul>
+  {% endfor %}
+{% endblock %}
+
+{% block meginmal %}
+<section id="main">
+  <h1>{{ deck.name }}</h1>
+  <ul>
+    <section id="cards">
+    {% for c in cards %}
+      <div class="container" id="{{ c.id }}">
+        <div class="card">
+          <div class="face front"> 
+    	     {{ c.question }}
+          </div> 
+          <div class="face back"> 
+    	     {{ c.answer }}
+            <div class="answer">
+              <button class="small red" data-id="rangt">✗</button>
+              <button class="small green" data-id="rett">✓</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+      <form id="hidden" type="hidden">
+        {% csrf_token %}
+        <input type="hidden" value="" id="svar" name="svar" />
+      </form>
+    </section>
+  </ul>
+</section>
+<section id="right">
+  <h2>Hliðarspalti</h2>
+</section>
+{% endblock %}
+
+{% block skriptur %}
+<script>
+  var deck = {};
+  deck.id = '{{ deck.id }}';
+  deck.name = '{{ deck.name }}';
+  var cards = [{% for c in cards %}{ id: '{{ c.pk }}', question: '{{ c.question }}', answer: '{{ c.answer }}'}{% if forloop.last %} {% else %},{% endif %} {% endfor %}];
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/selectDeck.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/view_single_deck.js"></script>
+{% endblock %}

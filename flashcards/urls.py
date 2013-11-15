@@ -1,7 +1,11 @@
 from django.conf.urls import patterns, url
-from flashcards import views
+from .views import view_decks, deck, create_deck, create_cards
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
-    url(r'^(?P<deck_id>\d+)/$', views.deck_view, name='deck_view'),
+    url(r'^$', view_decks.as_view(), name='index'),
+    url(r'^(?P<deck_id>\d+)/$', deck.as_view(), name='deck_view'),
+    url(r'^create/$', create_deck.as_view(), name='create_deck'),
+    url(r'^create/(?P<deck_id>\d+)/', create_cards.as_view(), name="create_card"),
+    url(r'^edit/(?P<card_id>\d+)', create_cards.as_view(), name="edit_card"),
+    
 )

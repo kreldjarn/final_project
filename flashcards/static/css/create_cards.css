@@ -1,0 +1,46 @@
+ul#tilbuin_spjold
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+	ul#tilbuin_spjold li
+	{
+		border-bottom: 1px solid #ccc;
+	}
+
+form#nytt_spjald
+{
+
+}
+
+	form#nytt_spjald input[type=text]
+	{
+		width: calc(100% - 20px - 2px);
+		font-size: 1.5em;
+		border: 1px solid #ccc;
+		padding: 10px;
+		font-family: inherit;
+		margin: 0 0 10px 0;
+		outline: none;
+	}
+
+		form#nytt_spjald input[type=text]:focus
+		{
+
+		}
+
+	form#nytt_spjald input[type=submit]
+	{
+		border: none;
+		padding: 10px;
+		background: #fff;
+		font-size: 1.5em;
+		font-family: inherit;
+		background: #7e7e7e;
+		margin: 0;
+		width: 100%;
+		cursor: pointer;
+		color: #FFF;
+	}

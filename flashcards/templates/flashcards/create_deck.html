@@ -1,0 +1,21 @@
+{% extends "flashcards/flashcards_base.html" %}
+{% block titill %}Smíða nýjan stafla{% endblock %}
+
+
+{% block meginmal %}
+<article id="content">
+  <form id="nyr_stafli" name="nyr_stafli">
+    <input type="text" placeholder="Nafn stafla" id="nafn" name="nafn" autofocus />
+    <input type="Submit" value="Smíða stafla" />
+  </form>
+
+  <form id="hidden" type="hidden" action="/create/" method="post">
+    {% csrf_token %}
+    <input id="stafli" type="hidden" value="" name="stafli" />
+  </form>
+</article>
+{% endblock %}
+
+{% block skriptur %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/create_deck.js"></script>
+{% endblock %}

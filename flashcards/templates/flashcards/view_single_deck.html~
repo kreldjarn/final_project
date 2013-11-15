@@ -1,0 +1,44 @@
+{% extends 'flashcards/flashcards_base.html' %}
+
+{% block title %}Stokkur: {{ deck.name }}{% endblock %}
+
+{% block meginmal %}
+<select id="selectDeck">
+  <option>Veldu bunka</option>
+  {% for d in decks %}
+  <option value="{{ d.id }}">{{ d.name }}</option>
+  {% endfor %}
+</select>
+<article id="container">
+<h1>{{ deck.name }}</h1>
+<ul>
+  {% for c in cards %}
+  <div class="flip" id="{{ c.id }}">
+    <div class="card"> 
+      <div class="face front"> 
+	{{ c.question }}
+      </div> 
+      <div class="face back"> 
+	{{ c.answer }}
+	<div class="buttonContainer">
+	  <a class="ans wrongButton" id="rangt{{ c.id }}">Rangt</a>
+	  <a class="ans rightButton" id="rett{{ c.id }}">Rétt</a>
+	</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</ul>
+</article>
+{% endblock %}
+
+{% block skriptur %}
+<script>
+  var deck = {};
+  deck.id = '{{ deck.id }}';
+  deck.name = '{{ deck.name }}';
+  var cards = [{% for c in cards %}{ id: '{{ c.pk }}', question: '{{ c.question }}', answer: '{{ c.answer }}'}{% if forloop.last %} {% else %},{% endif %} {% endfor %}];
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/selectDeck.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/view_single_deck.js"></script>
+{% endblock %}
