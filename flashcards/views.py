@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core import serializers
 from django.views.generic.base import View
 from flashcards.models import *
+import json
 
 class view_decks(View):
     template_name = "flashcards/view_decks.html"
@@ -62,4 +63,18 @@ class create_cards(View):
         print(currentDeck)
         print(cards)
         return render(request, self.template_name, locals())
+
     # Notum POST-adferdina i create_deck einnig fyrir create_cards
+
+class edit_card(View):
+    def post(self, request, card_id):
+        #card = Card.objects.get(id=card_id)
+        #card.active = False
+        #card.save()
+
+        spjald = request.POST.get("spjald")
+        if spjald:
+            spjald = json.loads(spjald)
+            print(spjald)
+
+            

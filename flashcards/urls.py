@@ -6,4 +6,6 @@ urlpatterns = patterns('',
     url(r'^(?P<deck_id>\d+)/$', deck.as_view(), name='deck_view'),
     url(r'^create/$', create_deck.as_view(), name='create_deck'),
     url(r'^create/(?P<deck_id>\d+)/', create_cards.as_view(), name="create_card"),
+    url(r'^edit/(?P<card_id>\d+)', create_cards.as_view(), name="edit_card"),
+    
 )

@@ -12,7 +12,7 @@ ul#tilbuin_spjold
 
 form#nytt_spjald
 {
-	background: red;
+
 }
 
 	form#nytt_spjald input[type=text]
@@ -33,7 +33,14 @@ form#nytt_spjald
 
 	form#nytt_spjald input[type=submit]
 	{
-		border: 1px solid #ccc;
+		border: none;
 		padding: 10px;
-		background: ;
+		background: #fff;
+		font-size: 1.5em;
+		font-family: inherit;
+		background: #7e7e7e;
+		margin: 0;
+		width: 100%;
+		cursor: pointer;
+		color: #FFF;
 	}
