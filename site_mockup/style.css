@@ -22,59 +22,55 @@ body
 
 	#stacks ul.stack
 	{
+		z-index: 0 !important;
 		position: relative;
 		margin: 0px auto;
 		width: 82px;
-		height: 83px;
 		padding: 0px;
-		margin-bottom: 10px;
 		list-style: none;
 
 	}
 
-	#stacks ul.stack li.stack-card
+	#stacks ul.stack li
 	{
-		border: 1px solid #ccc;
 		width: 80px;
-		height: 59px;
-		position: absolute;
-		margin-top: -10px;
-		background: #fff;
-
-		-webkit-transform-origin: 50% 100%;
-		-webkit-transform: perspective(40px) rotateX(22deg);
+		height: 4px;
+		display: block;
+		overflow: visible;
 	}
 
-		#stacks ul.stack li.stack-card.n0
+		#stacks ul.stack li .stack-card
 		{
-			top: 0px;
-			z-index: 4;
-		}
-		#stacks ul.stack li.stack-card.n1
-		{
-			top: 3px;
-			z-index: 3;
-		}
-		#stacks ul.stack li.stack-card.n2
-		{
-			top: 6px;
-			z-index: 2;
-		}
-		#stacks ul.stack li.stack-card.n3
-		{
-			top: 9px;
-			z-index: 1;
+			position: relative;
+			top: 0;
+			left: 0;
+			height: 30px;
+			border: 1px solid #ccc;
+			display: block;
+			width: calc(100%-2px);
+			-webkit-transform-origin: 50% 100%;
+			-webkit-transform: perspective(30px) rotateX(22deg);
+			background: #fff;
 		}
 
-		#stacks ul.stack li.name
+		#stacks p
 		{
-			position: absolute;
 			font-size: 0.8em;
 			width: 100%;
 			text-align: center;
 			color: #666;
-			bottom: 0px;
+			margin: 34px 0 0 0;
 		}
+
+.stack-button
+{
+	cursor: pointer;
+}
+
+	.stack-button:hover .stack-card
+	{
+		background: #ececec !important;
+	}
 
 #main
 {
@@ -118,18 +114,18 @@ body
 					font-size: 0.8em;
 				}
 
-				button.green
+				.green
 				{
-					border-color: #32cd32;
-					color: #32cd32;
-					background: #befebe;
+					border-color: #32cd32 !important;
+					color: #32cd32 !important;
+					background: #befebe !important;
 				}
 
-				button.red
+				.red
 				{
-					border-color: #cd3238;
-					color: #cd3238;
-					background: #ffb3b9;
+					border-color: #cd3238 !important;
+					color: #cd3238 !important;
+					background: #ffb3b9 !important;
 				}
 
 				button:hover
@@ -166,6 +162,10 @@ body
 	height: 220px;
 }
 
+button.hidden
+{
+	display: none;
+}
 
 .card
 {
@@ -182,6 +182,7 @@ body
 	{
 		position: absolute;
 		top: 0;
+		left: 0;
 		-webkit-backface-visibility: hidden;
 	}
 
@@ -192,12 +193,13 @@ body
 
 	.card .face.back
 	{
-		z-index: 1 !important;
+		z-index: 100 !important;
 		-webkit-transform: rotateY(180deg);
 	}
 
 		.card .back .answer
 		{
+			z-index: 120 !important;
 			position: absolute;
 			width: 100%;
 			text-align: center;

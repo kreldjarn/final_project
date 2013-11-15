@@ -1,12 +1,16 @@
 {% extends "flashcards/flashcards_base.html" %}
+{% load staticfiles %}
+{% block utlit %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/create_cards.css' %}" />
+{% endblock %}
 
 {% block meginmal %}
 <section id="main">
 	<h1>Spjöld í staflanum {{ currentDeck.name }}</h1>
 
 	<form id="nytt_spjald" name="nytt_spjald">
-		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autofocus />
-		<input type="text" placeholder="Svar" id="svar" name="svar" />
+		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autocomplete="off" autofocus />
+		<input type="text" placeholder="Svar" id="svar" name="svar" autocomplete="off" />
 		<input type="Submit" value="Búa til spjald" />
 	</form>
 	
