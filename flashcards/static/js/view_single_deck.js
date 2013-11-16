@@ -1,27 +1,35 @@
 var top_el = $("#cards");
 
+var cards_init_length = cards.length;
+
 function showCards()
 {
     var html = '<div class="top">';
     var template = $('#flip-card').html();
     var compiled = _.template(template);
+
     for(var i = 0; i < cards.length; ++i)
     {
         var c = cards[i];
-        var zind = i === 0 ? 'inherit' : -1-i;
+
+        var dzoom = 1 - ((i / cards_init_length) * 0.2);
 
         var html_string = compiled({
             id: c.id,
             question: c.question,
             answer: c.answer,
-            zind: zind
+            style: 'z-index: ' + (-1-i) +
+            '; -webkit-transform: scale(' + dzoom + ')'
         });
 
         html += html_string;
-        if(i === 0) html += '</div>';
+        if(i === 0) html += '</div><div class="lower">'
     }
 
+    html += '</div>';
+
     $("section#cards").html(html);
+    console.log("Show cards");
 }
 
 // Færum þetta e-ð annað. Í raun til að rendera
@@ -51,7 +59,7 @@ top_el.delegate(".answer button", "click", function(e) {
         url: "/" + card_id + "/",
         data: $("#hidden").serialize(),
         success: function() {
-            updateCardView(card_el, ans_value);
+            updateCardView(ans_value);
             console.log("Jibbí!");
         },
         error: function() {
@@ -60,18 +68,38 @@ top_el.delegate(".answer button", "click", function(e) {
     });
 });
 
-///////////////////////////////////////////////////////
-
-function updateCardView(card_el, ans_value)
+function removeCardWithId(id)
 {
-    var cards_top_el = $("section#cards");
-    console.log(card_el.id);
+    for(var i = 0; i < cards.length; ++i)
+    {
+        // Ok, ég þurfti að skrifa sequential search …
+        if(cards[i].id === id)
+        {
+            cards = cards.slice(i, 1);
+            return i;
+        }
+    }
+    return false;
+}
 
+function removeTopCard()
+{
+    if(cards.length > 0)
+    {
+        var card = cards[0];
+        cards = cards.slice(1, cards.length);
+        return card;
+    }
+    return false;
+}
+
+function updateCardView(ans_value)
+{
+    var card = removeTopCard();
 
     if(ans_value === "rangt")
     {
-        card_el.find(".card").removeClass("flip");
-        cards_top_el.append(card_el);
+        cards.push(card);
     }
 
     showCards();
