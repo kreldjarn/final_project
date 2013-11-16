@@ -26,7 +26,7 @@
   var cards = [{% for c in cards %}{ id: '{{ c.pk }}', question: '{{ c.question }}', answer: '{{ c.answer }}'}{% if forloop.last %} {% else %},{% endif %} {% endfor %}];
 </script>
 <script type="javascript/template" id="flip-card">
- <div class="container" id="<%= id %>">
+ <div class="container" id="<%= id %>" style="z-index: <%= zind %>;">
    <div class="card">
      <div class="face front"> 
       <%= question %>
