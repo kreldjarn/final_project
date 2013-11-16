@@ -4,23 +4,19 @@ var answer_input = form_element.find('input#svar');
 
 var enter_keycode = 13;
 
-question_input.on('focus', function () {
-	$(this).on('keydown', function (e) {
-		if(e.which === enter_keycode)
-		{
-			e.preventDefault();
-			answer_input.focus();
-		}
-	});
+$(question_input).on('keydown', function (e) {
+	if(e.which === enter_keycode)
+	{
+		e.preventDefault();
+		answer_input.focus();
+	}
 });
 
-answer_input.on('focus', function () {
-	$(this).on('keydown', function (e) {
-		if(e.which === enter_keycode)
-		{
-			question_input.focus();
-		}
-	});
+$(answer_input).on('keydown', function (e) {
+	if(e.which === enter_keycode)
+	{
+		question_input.focus();
+	}
 });
 
 var tilbuid_element = $("#tilbuin_spjold");

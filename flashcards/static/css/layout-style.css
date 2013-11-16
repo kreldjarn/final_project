@@ -272,8 +272,8 @@ body
 	.card .face
 	{
 		padding: 40px;
-		width: calc(100% - 80px);
-		height: calc(100% - 80px);
+		width: 316px;
+		height: 140px;
 		text-align: center;
 	}
 
