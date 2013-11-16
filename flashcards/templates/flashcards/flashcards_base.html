@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>{% block titill %}staf.li{% endblock %}</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" ></script>
   <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
   <link type="text/css" rel="stylesheet" href="{% static 'css/layout-style.css' %}" />
   {% block utlit %}{% endblock %}
@@ -19,7 +20,35 @@
   <section id="wrap">
     <section id="stacks">
       <h2>Staflar</h2>
-      {% block stacks %} {% endblock %}
+      {% block stacks %} 
+        {% for d in decks %}
+        <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
+          <ul class="stack">
+            <li>
+              <div class="stack-card"></div>
+            </li> 
+            <li> 
+              <div class="stack-card"></div>
+            </li> 
+            <li> 
+              <div class="stack-card"></div>
+            </li> 
+            <li> 
+              <div class="stack-card"></div>
+            </li> 
+            <li> 
+              <div class="stack-card"></div>
+            </li> 
+            <li> 
+              <div class="stack-card"></div>
+            </li>
+          </ul>
+          <p>
+            {{ d.name }}
+          </p>
+        </a>
+        {% endfor %}
+      {% endblock %}
     </section>
     <section id="main">
       {% block meginmal %}Ekkert efni til staðar{% endblock %}

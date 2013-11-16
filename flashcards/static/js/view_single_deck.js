@@ -27,6 +27,33 @@ top_el.delegate(".answer button", "click", function(e) {
     });
 });
 
+function showCards()
+{
+    var html = "";
+    var template = $('#flip-card').html();
+    var compiled = _.template(template);
+    for(var i = 0; i < cards.length; ++i)
+    {
+        var c = cards[i];
+        html += compiled({
+            id: c.id,
+            question: c.question,
+            answer: c.answer
+        });
+    }
+
+    $("section#cards").html(html);
+}
+
+
+// Færum þetta e-ð annað. Í raun til að rendera
+// template-ið og spýta út í DOM ið eftir því hvernig
+// röðin á kortunum eru í cards[] JS fylkinu
+// S.s. til að update-a viewið fyrir læri-ham.
+// Því við viljum geta shufflað/bætt aftast í random röð
+// og svo framvegis, þegar líður á lærdóms-sessjón.
+showCards();
+
 function updateCardView(card_el, ans_value)
 {
     var cards_top_el = $("section#cards");
