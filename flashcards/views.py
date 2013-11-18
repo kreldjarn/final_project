@@ -50,8 +50,9 @@ class create_deck(View):
             return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
         elif request.POST.get("spjald"):
             for o in serializers.deserialize("json", request.POST.get("spjald")):
-                o.save()
-                objects.append(o.object)
+                if (o.object.question and o.object.answer):
+                    o.save()
+                    objects.append(o.object)
             return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
 
 
@@ -73,16 +74,19 @@ class edit_card(View):
         #card.save()
         return HttpResponse()
 
-        spjald = request.POST.get("spjald")
-        if spjald:
-            spjald = json.loads(spjald)
+        data = request.POST.get("spjald")
+        if data:
+            spjald = json.loads(data)
             print(spjald)
-
-class delete_card(View):
-    def post(self, request, card_id):
-        card = Card.objects.get(id=card_id)
-        card.active = False
-        card.save()
-        return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
-
-            
+            return HttpResponse()
+        data = request.POST.get("visible")
+        if data:
+            visible = json.loads(data)
+            print(visible)
+            return HttpResponse()
+        data = request.POST.get("active")
+        if data:
+            active = json.loads(data)
+            print(active)
+            return HttpResponse()
+        return HttpResponse()
