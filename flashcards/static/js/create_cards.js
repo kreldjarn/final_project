@@ -132,7 +132,8 @@ function deactivate(e) {
 
 	$.ajax({
 		type: "POST",
-		url: "/delete/card/" + id,
+		url: "/create/" + id,
+		// TODO: Code for connecting correctly to backend
 		success: function() {
 			console.log("Success deleting card: " + id);
 		},
