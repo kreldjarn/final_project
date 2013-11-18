@@ -12,12 +12,16 @@
 		<input type="text" placeholder="Svar" id="svar" name="svar" autocomplete="off" />
 		<input type="Submit" value="Búa til spjald" />
 	</form>
-	
+
 	<ul id="tilbuin_spjold">
 		{% for c in cards %}
 			<li id="{{ c.id }}">
-				<p>{{ c.question }}</p>
-				<p>{{ c.answer }}</p>
+				<form name="{{ c.id }}">
+					<input type="text" value="{{ c.question }}" name="question" />
+					<input type="text" value="{{ c.answer }}" name="question" />
+					<input type="checkbox" name="visible" checked />
+					<button class="delete red small">×</button>
+				</form>
 			</li>
 		{% endfor %}
 	</ul>
@@ -25,8 +29,6 @@
 	<form type="hidden" id="hidden" name="hidden">
 		{% csrf_token %}
 		<input id="spjald" type="hidden" value="" name="spjald" />
-		<input id="active" type="hidden" value="" name="active" />
-		<input id="visible" type="hidden" value="" name="visible" />
 	</form>
 {% endblock %}
 
@@ -34,6 +36,24 @@
 <script>
 	// Eftirsjárverð, víðvær breyta
 	var deck_id = {{ currentDeck.id }}
+</script>
+<!-- 
+{
+	id : 
+	question : 
+	answer : 
+	visible : 
+}
+-->
+<script type="text/template" id="edit_card_view">
+	<li id="<%= id %>">
+		<form name="<%= id %>">
+			<input type="text" value="<%= question %>" name="question" />
+			<input type="text" value="<%= answer %>" name="answer" />
+			<input type="checkbox" name="visible" <%= checked %> />
+			<button class="delete red small">×</button>
+		</form>
+	</li>
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/create_cards.js"></script>
 {% endblock %}

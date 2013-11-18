@@ -39,7 +39,7 @@ body
 		overflow: visible;
 	}
 
-		#stacks ul.stack li.stack-card
+		#stacks ul.stack li .stack-card
 		{
 			position: relative;
 			top: 0;
@@ -48,9 +48,9 @@ body
 			border: 1px solid #ccc;
 			display: block;
 			width: calc(100%-2px);
+			background: #fff;
 			-webkit-transform-origin: 50% 100%;
 			-webkit-transform: perspective(30px) rotateX(22deg);
-			background: #fff;
 		}
 
 		#stacks p
@@ -94,7 +94,7 @@ body
 			{
 				font-size: 2.2em;
 				margin: 0 20px 0 0;
-				padding: 0px;
+				
 				display: inline-block;
 				border: 4px solid #ccc;
 				width: 70px;
@@ -133,6 +133,18 @@ body
 					border-color: #cd3238 !important;
 					color: #cd3238 !important;
 					background: #ffb3b9 !important;
+				}
+
+				button.delete
+				{
+
+					padding: 3px 5px 5px 5px;
+					margin: 17px 0px 10px 10px;
+					vertical-align: center;
+					font-size: 1em;
+					line-height: 0.9em;
+					width: auto;
+					height: auto;
 				}
 
 				button:hover
@@ -237,7 +249,7 @@ body
 			text-align: center;
 		}
 
-	/* Omit first child. (That's a bit unethical). */
+	/* Omit first child. (That's a bit harsh). */
 
 	#cards .lower
 	{
