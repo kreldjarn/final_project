@@ -18,62 +18,61 @@ body
 	width: 188px;
 	margin: 0px 20px 0px 0px;
 	float: left;
+	z-index: -1;
 }
 
 	#stacks ul.stack
 	{
+		z-index: 0 !important;
 		position: relative;
 		margin: 0px auto;
 		width: 82px;
-		height: 83px;
 		padding: 0px;
-		margin-bottom: 10px;
 		list-style: none;
-		cursor: pointer;
 	}
 
-	#stacks ul.stack li.stack-card
+	#stacks ul.stack li
 	{
-		border: 1px solid #ccc;
 		width: 80px;
-		height: 59px;
-		position: absolute;
-		margin-top: -10px;
-
-		/*-webkit-transform-origin: 50% 100%;
-		-webkit-transform: perspective(40px) rotateX(22deg);*/
+		height: 4px;
+		display: block;
+		overflow: visible;
 	}
 
-		#stacks ul.stack li.stack-card.n0
+		#stacks ul.stack li.stack-card
 		{
-			top: 0px;
-			z-index: 4;
-		}
-		#stacks ul.stack li.stack-card.n1
-		{
-			top: 3px;
-			z-index: 3;
-		}
-		#stacks ul.stack li.stack-card.n2
-		{
-			top: 6px;
-			z-index: 2;
-		}
-		#stacks ul.stack li.stack-card.n3
-		{
-			top: 9px;
-			z-index: 1;
+			position: relative;
+			top: 0;
+			left: 0;
+			height: 30px;
+			border: 1px solid #ccc;
+			display: block;
+			width: calc(100%-2px);
+			-webkit-transform-origin: 50% 100%;
+			-webkit-transform: perspective(30px) rotateX(22deg);
+			background: #fff;
 		}
 
-		#stacks ul.stack li.name
+		#stacks p
 		{
-			position: absolute;
 			font-size: 0.8em;
 			width: 100%;
 			text-align: center;
 			color: #666;
-			bottom: 0px;
+			margin: 34px 0 0 0;
 		}
+
+.stack-button
+{
+	cursor: pointer;
+	text-decoration: none;
+	color: inherit;
+}
+
+	.stack-button:hover .stack-card
+	{
+		background: #ececec !important;
+	}
 
 #main
 {
@@ -109,6 +108,11 @@ body
 				outline: none;
 			}
 
+				button:last-child
+				{
+					margin: 0;
+				}
+
 				button.small
 				{
 					width: 50px;
@@ -117,18 +121,18 @@ body
 					font-size: 0.8em;
 				}
 
-				button.green
+				.green
 				{
-					border-color: #32cd32;
-					color: #32cd32;
-					background: #befebe;
+					border-color: #32cd32 !important;
+					color: #32cd32 !important;
+					background: #befebe !important;
 				}
 
-				button.red
+				.red
 				{
-					border-color: #cd3238;
-					color: #cd3238;
-					background: #ffb3b9;
+					border-color: #cd3238 !important;
+					color: #cd3238 !important;
+					background: #ffb3b9 !important;
 				}
 
 				button:hover
@@ -138,6 +142,7 @@ body
 
 				button:active
 				{
+
 				}
 
 #right
@@ -159,21 +164,40 @@ body
 	height: 220px;
 }
 
-.card
-{
-	width: calc(100% - 8px);
-	height: calc(100% - 8px);
-	border: 4px solid #cecece;
-	font-size: 1.5em;
-	/*box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);*/
-	-webkit-transition: 0.6s;
-	-webkit-transform-style: preserve-3d;
-}
+	#cards .container .card
+	{
+		width: 396px;
+		height: 220px;
+		font-size: 1.5em;
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+	}
 
-	.card .face.front, .card .face.back
+	#cards .top .container
+	{
+		position: absolute;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		display: block !important;
+/*		-webkit-transition: 1s all ease-in-out; */
+		z-index: 100 !important;
+	}
+
+		#cards .top .container .card
+		{
+			cursor: pointer;
+			-webkit-transition: 0.6s;
+			-webkit-transform-style: preserve-3d;
+			display: inherit;
+			z-index: 100 !important;
+		}
+
+	#cards .top .container .card .face.front, .card .face.back
 	{
 		position: absolute;
 		top: 0;
+		background: #fff;
+		-webkit-transform-style: flat;
 		-webkit-backface-visibility: hidden;
 	}
 
@@ -182,29 +206,78 @@ body
 
 	}
 
-	.card .face.back
+	#cards .top
 	{
-		z-index: 1 !important;
+		z-index: 100 !important;
+		-webkit-transform: zoom(1);
+	}
+
+	#cards .top .container .card .face.back
+	{
 		-webkit-transform: rotateY(180deg);
 	}
 
-		.card .back .answer
+		.card .back
+		{
+			display: none;
+		}
+
+		#cards .top .container .card .back
+		{
+			display: block;
+		}
+
+		#cards .top .card .back .answer
 		{
 			position: absolute;
-			width: 100%;
+			bottom: 40px;
+			z-index: 1000;
+			left: 0;
+			right: 0;
 			text-align: center;
-			bottom: 0;
 		}
+
+	/* Omit first child. (That's a bit unethical). */
+
+	#cards .lower
+	{
+		z-index: -100 !important;
+		-webkit-transform: zoom(1);
+	}
+
+	#cards .lower .container
+	{
+		position: relative;
+		top: 10px;
+		height: 0px;
+		margin: 10px auto;
+		overflow: visible;
+		z-index: -1;
+		
+		/*-webkit-transform-origin: 50% 50%;
+		-webkit-transform: perspective(1000px) rotateX(40deg) scale(0.9);*/
+	}
+		#cards .lower .container .card
+		{
+			-webkit-transform-style: flat !important;
+			z-index: 100;
+			background: #fff;
+		}
+
+			#cards .lower .container .card .face
+			{
+				display: none;
+			}
 
 	.card .face
 	{
-		margin: 40px;
-		width: calc(100% - 80px);
-		height: calc(100% - 80px);
+		padding: 40px;
+		width: 316px;
+		height: 140px;
 		text-align: center;
 	}
 
-	.card.flip
+	#cards .top .container .card.flip
 	{
 		-webkit-transform: rotateY(180deg);
 	}
