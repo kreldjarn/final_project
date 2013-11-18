@@ -13,7 +13,7 @@ function showCards()
         var c = cards[i];
 
         var dzoom = 1 - ((i / cards_3d_factor) * 0.2);
-        //if(dzoom < 0) dzoom = 0;
+        if(dzoom < 0) dzoom = 0;
 
         var html_string = compiled({
             id: c.id,
