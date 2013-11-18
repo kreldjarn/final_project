@@ -71,10 +71,18 @@ class edit_card(View):
         #card = Card.objects.get(id=card_id)
         #card.active = False
         #card.save()
+        return HttpResponse()
 
         spjald = request.POST.get("spjald")
         if spjald:
             spjald = json.loads(spjald)
             print(spjald)
+
+class delete_card(View):
+    def post(self, request, card_id):
+        card = Card.objects.get(id=card_id)
+        card.active = False
+        card.save()
+        return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
 
             

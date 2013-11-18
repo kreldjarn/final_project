@@ -69,20 +69,6 @@ top_el.delegate(".answer button", "click", function(e) {
     });
 });
 
-function removeCardWithId(id)
-{
-    for(var i = 0; i < cards.length; ++i)
-    {
-        // Ok, ég þurfti að skrifa sequential search …
-        if(cards[i].id === id)
-        {
-            cards = cards.slice(i, 1);
-            return i;
-        }
-    }
-    return false;
-}
-
 function removeTopCard()
 {
     if(cards.length > 0)
