@@ -72,6 +72,7 @@ class edit_card(View):
         #card = Card.objects.get(id=card_id)
         #card.active = False
         #card.save()
+        return HttpResponse()
 
         data = request.POST.get("spjald")
         if data:

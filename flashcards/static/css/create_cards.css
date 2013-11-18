@@ -44,3 +44,37 @@ form#nytt_spjald
 		cursor: pointer;
 		color: #FFF;
 	}
+
+#tilbuin_spjold
+{
+
+}
+
+	#tilbuin_spjold li form input
+	{
+		border: 1px solid #eee;
+		outline: none;
+		background: none;
+		font-size: inherit;
+		font-family: inherit;
+		padding: 10px;
+		margin: 10px 10px 10px 0;
+		-webkit-transition: 0.2s all ease-in-out;
+	}
+
+		#tilbuin_spjold li form input[type=text]
+		{
+			width: 227px;
+		}
+			#tilbuin_spjold li form input[type=text]:last-child
+			{
+				margin-right: 0;
+			}
+
+		#tilbuin_spjold li form input.edit
+		{
+			border: 1px solid #fff;
+			box-shadow: 0 0 6px rgba(120, 120, 240, 0.4);
+			-webkit-transition: 0.2s all ease-in-out;
+		}
+
