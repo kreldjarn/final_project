@@ -15,14 +15,16 @@
 
 	<ul id="tilbuin_spjold">
 		{% for c in cards %}
-			<li id="{{ c.id }}">
-				<form name="{{ c.id }}">
-					<input type="text" value="{{ c.question }}" name="question" />
-					<input type="text" value="{{ c.answer }}" name="question" />
-					<input type="checkbox" name="visible" checked />
-					<button class="delete red small">×</button>
-				</form>
-			</li>
+			{% if c.active %}
+				<li id="{{ c.id }}">
+					<form name="{{ c.id }}">
+						<input type="text" value="{{ c.question }}" name="question" />
+						<input type="text" value="{{ c.answer }}" name="answer" />
+						<input type="checkbox" name="visible" {% if c.visible %}checked{% endif %} />
+						<button class="delete red small">×</button>
+					</form>
+				</li>
+			{% endif %}
 		{% endfor %}
 	</ul>
 	

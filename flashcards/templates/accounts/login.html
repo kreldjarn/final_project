@@ -1,0 +1,15 @@
+{% extends "accounts/accounts_base.html" %}
+
+{% block meginmal %}
+
+{% if form.errors %}
+<p>Notendanafn eða lykilorð rangt!</p>
+{% endif %}
+
+<form action="/account/authenticate/" method="post">
+  {% csrf_token %}
+  <input type="text" name="username" value="" placeholder="Notendanafn" />
+  <input type="password" name="password"  value="" placeholder="Lykilorð" />
+  <input type="submit" value="Innritun" />
+</form>
+{% endblock %}

@@ -70,6 +70,21 @@ function createCards(e, form_element)
 	});
 }
 
+function Entry(id, deck_id)
+{
+	return {
+		model 			: 'flashcards.card',
+		pk				: id,
+		fields 			: {
+			deck		: deck_id,
+			question 	: "",
+			answer   	: "",
+			active		: "",
+			visible		: ""
+		}
+	};
+}
+
 function editCard(e, bypass) {
 
 	bypass = bypass || false;
@@ -79,28 +94,27 @@ function editCard(e, bypass) {
 	if(((e.which === enter_keycode) || bypass))
 	{
 		e.preventDefault();
+		var target = $(e.target);
 
-		var top_el = $(e.target).parent().parent();
+		var top_el = target.parent().parent();
 		var id = top_el.attr('id');
-
-		console.log(top_el);
 
 		var question = "";
 		var answer = "";
 		var active = "";
 		var visible = "";
 
-		var entry = {
-			model 			: 'flashcards.card',
-			pk				: id,
-			fields 			: {
-				deck		: deck_id,
-				question 	: question,
-				answer   	: answer,
-				active		: active,
-				visible		: visible
-			}
-		};
+		var entry = Entry(id, deck_id);
+
+		if (target.attr('name') === "visible")
+		{
+			entry.fields[target.attr('name')] = target.is(':checked');
+			console.log(entry.fields[target.attr('name')]);
+		}
+		else
+		{
+			entry.fields[target.attr('name')] = target.val();
+		}
 
 		var hiddenForm = $('#hidden');
 		var hiddenFormField = $('#spjald');
@@ -109,7 +123,7 @@ function editCard(e, bypass) {
 
 		$.ajax({
 		type: "POST",
-		url: "/edit/" + id,
+		url: "/edit/",
 		data: data,
 		success: function(data) {
 			console.log("Success editing card: " + data);
@@ -130,17 +144,23 @@ function deactivate(e) {
 	var el = $(e.target).parent().parent();
 	var id = el.attr('id');
 
+	var hiddenForm = $('#hidden');
+	var hiddenFormField = $('#spjald');
+	hiddenFormField.val("");
+	var data = hiddenForm.serialize();
+
 	$.ajax({
 		type: "POST",
-		url: "/create/" + id,
+		url: "/delete/" + id + "/",
+		data: data,
 		// TODO: Code for connecting correctly to backend
 		success: function() {
+			el.slideToggle(200, function () {this.remove();});
 			console.log("Success deleting card: " + id);
 		},
 		error: function(jqXHR, status, error){
 			// Do not clear form if server does not 
 			// save the card
-			el.slideToggle(200, function () {this.remove();});
 			console.log("Nöldur frá bakenda: " + error);
 		}
 	});
@@ -160,7 +180,10 @@ function prependAddedCard(data)
 
 	// Not quite sure how boolean values are returned from server
 	// TODO: fix boolean shiznit
-	var checked = data[0].fields.visible === 'True';
+	var checked = ""
+	if(data[0].fields.visible)
+		checked = "checked";
+	console.log(checked);
 
 	var entry = {
 		id : id,

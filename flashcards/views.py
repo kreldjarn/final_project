@@ -74,33 +74,32 @@ class create_cards(View):
     template_name = "flashcards/create_cards.html"
     def get(self, request, deck_id):
         currentDeck = get_object_or_404(Deck, pk=deck_id)
-        cards = Card.objects.filter(deck=currentDeck)
-        print(currentDeck)
-        print(cards)
+        cards = Card.objects.filter(deck=currentDeck).order_by('-pk')
         return render(request, self.template_name, locals())
 
     # Notum POST-adferdina i create_deck einnig fyrir create_cards
 
 class edit_card(View):
-    def post(self, request, card_id):
-        card = Card.objects.get(id=card_id)
-        #card.active = False
-        #card.save()
-        return HttpResponse()
+    def post(self, request, card_id=None):
+        if card_id != None:
+            card = Card.objects.get(id=card_id)
+            card.active = False
+            card.save()
+            return HttpResponse()
 
         data = request.POST.get("spjald")
         if data:
             spjald = json.loads(data)
-            print(spjald)
-            return HttpResponse()
-        data = request.POST.get("visible")
-        if data:
-            visible = json.loads(data)
-            print(visible)
-            return HttpResponse()
-        data = request.POST.get("active")
-        if data:
-            active = json.loads(data)
-            print(active)
-            return HttpResponse()
+            fields = spjald[0]["fields"]
+            card = Card.objects.get(id=spjald[0]["pk"])
+            if fields["question"]:
+                card.question = fields["question"]
+            elif fields["answer"]:
+                card.answer = fields["answer"]
+            elif fields["visible"] != "":
+                card.visible = fields["visible"]
+            elif fields["active"]:
+                card.active = False
+            card.save()
+
         return HttpResponse()
