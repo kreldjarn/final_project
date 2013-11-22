@@ -47,8 +47,11 @@ def auth_view(request):
 	if user is None:
 		return HttpResponseRedirect('/account/invalid/')
 	auth.login(request, user)
-	print(request.GET)
-	return HttpResponseRedirect(request.GET.get('next'))
+
+	next = request.GET.get('next')
+	if next:
+		return HttpResponseRedirect(next)
+	return HttpResponseRedirect('/')
 	
 class logged(View):
 	def get(self, request):
