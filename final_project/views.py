@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.contrib import auth
 #from django.contrib.auth.forms import UserCreationForm
 from forms import SkraningarForm
@@ -26,9 +26,10 @@ class success(View):
 
 class login(View):
 	def get(self, request):
-		c = {}
-		c.update(csrf(request))
-		return render_to_response('accounts/login.html', c)
+		next = None
+		if request.GET.get('next'):
+			next = request.GET.get('next')
+		return render(request, 'accounts/login.html', locals())
 
 class logout(View):
 	def get(self, request):
@@ -46,7 +47,8 @@ def auth_view(request):
 	if user is None:
 		return HttpResponseRedirect('/account/invalid/')
 	auth.login(request, user)
-	return HttpResponseRedirect('/account/logged/')
+	print(request.GET)
+	return HttpResponseRedirect(request.GET.get('next'))
 	
 class logged(View):
 	def get(self, request):

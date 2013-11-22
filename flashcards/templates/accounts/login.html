@@ -5,8 +5,11 @@
 {% if form.errors %}
 <p>Notendanafn eða lykilorð rangt!</p>
 {% endif %}
-
+{% if next %}
+<form action="/account/authenticate/?next={{ next }}" method="post">
+{% else %}
 <form action="/account/authenticate/" method="post">
+{% endif %}
   {% csrf_token %}
   <input type="text" name="username" value="" placeholder="Notendanafn" />
   <input type="password" name="password"  value="" placeholder="Lykilorð" />

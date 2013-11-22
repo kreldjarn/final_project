@@ -3,11 +3,9 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.utils import timezone
 from django.core import serializers
 from django.views.generic.base import View
-from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from flashcards.models import *
 import json
-
 from braces.views import LoginRequiredMixin
 
 def to_base(q, alphabet):
