@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.utils import timezone
 from django.core import serializers
@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from flashcards.models import *
 import json
 from braces.views import LoginRequiredMixin
+from django.utils.html import escape
 
 def to_base(q, alphabet):
     if q < 0: raise ValueError, "must supply a positive integer"
@@ -25,6 +26,7 @@ class view_decks(LoginRequiredMixin, View):
     
     def get(self, request):
         decks = Deck.objects.all()
+        decks_created_by_current_user = Deck.objects.filter(creator=request.user)
         return render(request, self.template_name, locals())
 
 class deck(LoginRequiredMixin, View):
@@ -50,21 +52,27 @@ class deck(LoginRequiredMixin, View):
 
 class create_deck(LoginRequiredMixin, View):
     template_name = "flashcards/create_deck.html"
-    
     def get(self, request):
         return render(request, self.template_name, locals())
 
+    # This method is used to create both Deck entries and Card entries
     def post(self, request):
         objects = []
+        # If the posted item is a stack and not a card
         if request.POST.get("stafli"):
-            for o in serializers.deserialize("json", request.POST.get("stafli")):
-                o.save()
-                objects.append(o.object)
-                # Hack til thess ad itra yfir eitt stak i Generator Iterable
-                # Viljum ekki ad notandi geti submittad fleiri en einum stafla
-                # per POST-adgerd.
-                break
-            return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
+            print("here")
+            data = json.loads(request.POST.get("stafli"))[0]
+            print(data)
+            # Escape HTML-elements from our strings
+            # (Not strictly necessary)
+            data['fields']['creator'] = User.objects.get(pk=request.user.pk)
+            data['fields']['name'] = escape(data['fields']['name'])
+            deck = Deck(**data['fields'])
+            deck.save()
+            pk = str(deck.pk)
+            url_to_deck = "/create/" + pk + "/"
+            return HttpResponseRedirect(url_to_deck)
+        # If the posted item is a card and not a stack
         elif request.POST.get("spjald"):
             for o in serializers.deserialize("json", request.POST.get("spjald")):
                 if (o.object.question and o.object.answer):
@@ -77,10 +85,15 @@ class create_cards(LoginRequiredMixin, View):
 
     def get(self, request, deck_id):
         currentDeck = get_object_or_404(Deck, pk=deck_id)
-        cards = Card.objects.filter(deck=currentDeck).order_by('-pk')
-        return render(request, self.template_name, locals())
+        # Check whether current user created the requested stack
+        if request.user == currentDeck.creator:
+            print("typpo")
+            cards = Card.objects.filter(deck=currentDeck).order_by('-pk')
+            return render(request, self.template_name, locals())
+        # If not, we tell the off (Change later)
+        return HttpResponse("Skamm!")
 
-    # Notum POST-adferdina i create_deck einnig fyrir create_cards
+    # We use the POST-method from create_deck to create cards
 
 class edit_card(LoginRequiredMixin, View):
     def post(self, request, card_id=None):

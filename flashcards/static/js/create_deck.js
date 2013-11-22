@@ -8,16 +8,18 @@ $("#nyr_stafli").submit(function(e){
 	entry.fields.name = $('#nafn').val();
 
 	$('#stafli').val(JSON.stringify([entry]));
+	$('#hidden').submit()
 
-	$.ajax({
-		type: "POST",
-		url: "/create/",
-		data: $('#hidden').serialize(),
-		success: function(data) {
-			window.location.href = "/create/" + data[0].pk + "/";
-		},
-		error: function(jqXHR, status, error){
-			alert("Error: " + error);
-		}
-	});
+	//$.ajax({
+	//	type: "POST",
+	//	url: "/create/",
+	//	data: $('#hidden').serialize(),
+	//	success: function(data) {
+	//		console.log(data);
+	//		//window.location.href = "/create/" + data[0].pk + "/";
+	//	},
+	//	//error: function(jqXHR, status, error){
+	//	//	alert("Error: " + error);
+	//	//}
+	//});
 });

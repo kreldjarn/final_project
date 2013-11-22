@@ -9,6 +9,12 @@
   <option value="{{ d.id }}">{{ d.name }}</option>
   {% endfor %}
 </select>
+<h1>Staflar sem þér hafið smíðað:</h1>
+<ul>
+	{% for d in decks_created_by_current_user %}
+	<li>{{ d.name }} - {{ d.id }}</li>
+	{% endfor %}
+</ul>
 {% endblock %}
 
 {% block skriptur %}
