@@ -20,18 +20,21 @@ class register(View):
 			form.save()
 			return HttpResponseRedirect('/account/success/')
 
-def success(request):
-	return render_to_response('accounts/success.html')
+class success(View):
+	def get(self, request):
+		return render_to_response('accounts/success.html')
 
+class login(View):
+	def get(self, request):
+		c = {}
+		c.update(csrf(request))
+		return render_to_response('accounts/login.html', c)
 
-def login(request):
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('accounts/login.html', c)
+class logout(View):
+	def get(self, request):
+		auth.logout(request)
+		return render_to_response('accounts/logout.html')
 
-def logout(request):
-	auth.logout(request)
-	return render_to_response('accounts/logout.html')
 
 def auth_view(request):
 	# Ef notendanafn eda lykilord finnast ekki i forminu, faer tilsvarandi
@@ -44,9 +47,11 @@ def auth_view(request):
 		return HttpResponseRedirect('/account/invalid/')
 	auth.login(request, user)
 	return HttpResponseRedirect('/account/logged/')
+	
+class logged(View):
+	def get(self, request):
+		return render_to_response('accounts/logged.html', {'nafn': request.user.username})
 
-def logged(request):
-	return render_to_response('accounts/logged.html', {'nafn': request.user.username})
-
-def invalid(request):
-	return render_to_response('accounts/invalid.html')
+class invalid(View):
+	def get(self, request):
+		return render_to_response('accounts/invalid.html')	

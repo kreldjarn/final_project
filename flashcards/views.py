@@ -3,9 +3,12 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.utils import timezone
 from django.core import serializers
 from django.views.generic.base import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from flashcards.models import *
 import json
 
+from braces.views import LoginRequiredMixin
 
 def to_base(q, alphabet):
     if q < 0: raise ValueError, "must supply a positive integer"
@@ -19,16 +22,17 @@ def to_base(q, alphabet):
 def to36(q):
     return to_base(q, '0123456789abcdefghijklmnopqrstuvwxyz')
 
-
-class view_decks(View):
+class view_decks(LoginRequiredMixin, View):
     template_name = "flashcards/view_decks.html"
+    
     def get(self, request):
         decks = Deck.objects.all()
         return render(request, self.template_name, locals())
 
-class deck(View):
+class deck(LoginRequiredMixin, View):
     template_name = "flashcards/view_single_deck.html"
     time = None
+
     def get(self, request, deck_id):
         decks = Deck.objects.all()
         cards = Card.objects.filter(deck=deck_id)
@@ -46,8 +50,9 @@ class deck(View):
         card.save()
         return HttpResponse()
 
-class create_deck(View):
+class create_deck(LoginRequiredMixin, View):
     template_name = "flashcards/create_deck.html"
+    
     def get(self, request):
         return render(request, self.template_name, locals())
 
@@ -69,9 +74,9 @@ class create_deck(View):
                     objects.append(o.object)
             return HttpResponse(serializers.serialize('json', objects), content_type='application/json')
 
-
-class create_cards(View):
+class create_cards(LoginRequiredMixin, View):
     template_name = "flashcards/create_cards.html"
+
     def get(self, request, deck_id):
         currentDeck = get_object_or_404(Deck, pk=deck_id)
         cards = Card.objects.filter(deck=currentDeck).order_by('-pk')
@@ -79,7 +84,7 @@ class create_cards(View):
 
     # Notum POST-adferdina i create_deck einnig fyrir create_cards
 
-class edit_card(View):
+class edit_card(LoginRequiredMixin, View):
     def post(self, request, card_id=None):
         if card_id != None:
             card = Card.objects.get(id=card_id)
