@@ -1,6 +1,7 @@
 var top_el = $("#cards");
 
 var cards_3d_factor = 10;
+var max_cards_drawn = 16;
 
 function showCards()
 {
@@ -10,6 +11,7 @@ function showCards()
 
     for(var i = 0; i < cards.length; ++i)
     {
+        if (i === max_cards_drawn) break;
         var c = cards[i];
 
         var dzoom = 1 - ((i / cards_3d_factor) * 0.2);
@@ -20,7 +22,8 @@ function showCards()
             question: c.question,
             answer: c.answer,
             style: 'z-index: ' + (-1-i) +
-            '; -webkit-transform: scale(' + dzoom + ')'
+            '; -webkit-transform: scale(' + dzoom + ')',
+            extraClass : 'color' + Math.floor(i/2)
         });
 
         html += html_string;

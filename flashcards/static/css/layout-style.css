@@ -1,7 +1,13 @@
+::selection
+{
+	background: rgb(105, 157, 168);
+}
+
 body
 {
-	font-family: 'Helvetica';
-	min-width: 1120px;	
+	font-family: 'Open Sans';
+	min-width: 1120px;
+	background: rgb(136, 207, 206);
 }
 
 #wrap
@@ -45,10 +51,8 @@ body
 			top: 0;
 			left: 0;
 			height: 30px;
-			border: 1px solid #ccc;
 			display: block;
 			width: calc(100%-2px);
-			background: #fff;
 			-webkit-transform-origin: 50% 100%;
 			-webkit-transform: perspective(30px) rotateX(22deg);
 		}
@@ -58,7 +62,7 @@ body
 			font-size: 0.8em;
 			width: 100%;
 			text-align: center;
-			color: #666;
+			color: rgb(255, 255, 255);
 			margin: 34px 0 0 0;
 		}
 
@@ -67,12 +71,42 @@ body
 	cursor: pointer;
 	text-decoration: none;
 	color: inherit;
+	display: block;
+	margin-bottom: 10px;
 }
-
-	.stack-button:hover .stack-card
+	
+	.stack-button p
 	{
-		background: #ececec !important;
+		-webkit-transition: 0.2s text-shadow ease-in-out;
 	}
+
+	.stack-button:hover p
+	{
+		-webkit-transition: 0.2s text-shadow ease-in-out;
+		text-shadow: 0 0 6px rgba(105, 157, 168, 0.6);
+	}
+
+	.stack-button li:last-child .stack-card
+	{
+		-webkit-transition: 0.2s box-shadow ease-in-out;
+	}
+
+	.stack-button:hover li:last-child .stack-card
+	{
+		-webkit-transition: 0.2s box-shadow ease-in-out;
+		box-shadow: 0 0 10px rgba(105, 157, 168, 0.9);
+	}
+
+nav
+{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 50px;
+	background: #699da8;
+	z-index: 1000;
+}
 
 #main
 {
@@ -94,16 +128,14 @@ body
 			{
 				font-size: 2.2em;
 				margin: 0 20px 0 0;
-				
 				display: inline-block;
-				border: 4px solid #ccc;
 				width: 70px;
 				height: 50px;
 				text-align: center;
 				vertical-align: top;
-				border-radius: 6px;
-				color: #999;
+				color: rgb(255, 255, 255);
 				cursor: pointer;
+				border: none;
 				background: #FFF;
 				outline: none;
 			}
@@ -117,7 +149,7 @@ body
 				{
 					width: 50px;
 					height: 35px;
-					border: 2px solid #ccc;
+					border: none;
 					font-size: 0.8em;
 				}
 
@@ -181,7 +213,7 @@ body
 		width: 396px;
 		height: 220px;
 		font-size: 1.5em;
-		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	}
 
 	#cards .top .container
@@ -198,7 +230,8 @@ body
 		#cards .top .container .card
 		{
 			cursor: pointer;
-			-webkit-transition: 0.6s;
+			-webkit-user-select: none;
+			-webkit-transition: 0.2s;
 			-webkit-transform-style: preserve-3d;
 			display: inherit;
 			z-index: 100 !important;
@@ -208,7 +241,6 @@ body
 	{
 		position: absolute;
 		top: 0;
-		background: #fff;
 		-webkit-transform-style: flat;
 		-webkit-backface-visibility: hidden;
 	}
@@ -226,17 +258,14 @@ body
 
 	#cards .top .container .card .face.back
 	{
+		background: rgb(245, 245, 229);
 		-webkit-transform: rotateY(180deg);
+		display: block;
 	}
 
 		.card .back
 		{
 			display: none;
-		}
-
-		#cards .top .container .card .back
-		{
-			display: block;
 		}
 
 		#cards .top .card .back .answer
@@ -265,6 +294,7 @@ body
 		margin: 10px auto;
 		overflow: visible;
 		z-index: -1;
+		border: 1px solid rgb(250, 250, 238);
 		
 		/*-webkit-transform-origin: 50% 50%;
 		-webkit-transform: perspective(1000px) rotateX(40deg) scale(0.9);*/
@@ -273,12 +303,12 @@ body
 		{
 			-webkit-transform-style: flat !important;
 			z-index: 100;
-			background: #fff;
+			background: #fafaee;
 		}
 
 			#cards .lower .container .card .face
 			{
-				display: none;
+
 			}
 
 	.card .face
@@ -302,19 +332,17 @@ body
 h1
 {
 	font-weight: normal;
-	margin: 10px;
-	color: #666;
-	font-size: 1em;
-	text-transform: uppercase;
+	margin: 10px 10px 30px 10px;
+	color: rgb(255, 255, 255);
+	font-size: 1.7em;
 	text-align: center;
 }
 
 h2
 {
 	font-weight: normal;
-	margin: 10px;
-	color: #666;
-	font-size: 1em;
-	text-transform: uppercase;
+	margin: 16px 10px 30px 10px;
+	color: rgb(255, 255, 255);
+	font-size: 1.2em;
 	text-align: center;
 }

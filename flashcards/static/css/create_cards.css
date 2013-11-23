@@ -7,19 +7,21 @@ ul#tilbuin_spjold
 
 	ul#tilbuin_spjold li
 	{
-		border-bottom: 1px solid #ccc;
 	}
 
 form#nytt_spjald
 {
-
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	border-bottom: 4px solid rgb(143, 182, 190);
 }
 
 	form#nytt_spjald input[type=text]
 	{
-		width: calc(100% - 20px - 2px);
+		background: rgb(255, 255, 255);
+		width: calc(100% - 20px);
 		font-size: 1.5em;
-		border: 1px solid #ccc;
+		border: none;
 		padding: 10px;
 		font-family: inherit;
 		margin: 0 0 10px 0;
@@ -33,17 +35,24 @@ form#nytt_spjald
 
 	form#nytt_spjald input[type=submit]
 	{
+
 		border: none;
 		padding: 10px;
 		background: #fff;
 		font-size: 1.5em;
 		font-family: inherit;
-		background: #7e7e7e;
+		background: rgb(105, 157, 168);
 		margin: 0;
 		width: 100%;
 		cursor: pointer;
 		color: #FFF;
+		outline: none;
 	}
+
+		form#nytt_spjald input[type=submit]:active
+		{
+			background: rgb(95, 147, 158);
+		}
 
 #tilbuin_spjold
 {
@@ -52,19 +61,30 @@ form#nytt_spjald
 
 	#tilbuin_spjold li form input
 	{
-		border: 1px solid #eee;
+		border: none;
 		outline: none;
-		background: none;
+		background: rgb(217, 230, 233);
 		font-size: inherit;
 		font-family: inherit;
 		padding: 10px;
 		margin: 10px 10px 10px 0;
 		-webkit-transition: 0.2s all ease-in-out;
+		outline: none;
 	}
+
+		#tilbuin_spjold li form input:focus
+		{
+			background: rgb(255, 255, 255) !important;
+		}
+
+		#tilbuin_spjold li form input[type="checkbox"]:checked
+		{
+			background: red;
+		}
 
 		#tilbuin_spjold li form input[type=text]
 		{
-			width: 227px;
+			width: 39%;
 		}
 			#tilbuin_spjold li form input[type=text]:last-child
 			{
@@ -73,8 +93,7 @@ form#nytt_spjald
 
 		#tilbuin_spjold li form input.edit
 		{
-			border: 1px solid #fff;
-			box-shadow: 0 0 6px rgba(120, 120, 240, 0.4);
+			background: rgb(255, 255, 255);
 			-webkit-transition: 0.2s all ease-in-out;
 		}
 

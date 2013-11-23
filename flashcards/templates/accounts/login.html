@@ -1,4 +1,4 @@
-{% extends "accounts/accounts_base.html" %}
+{% extends "flashcards/flashcards_base.html" %}
 
 {% block meginmal %}
 
@@ -6,9 +6,9 @@
 <p>Notendanafn eða lykilorð rangt!</p>
 {% endif %}
 {% if next %}
-<form action="/account/authenticate/?next={{ next }}" method="post">
+<form action="/account/authenticate/?next={{ next }}" method="post" id="login_form">
 {% else %}
-<form action="/account/authenticate/" method="post">
+<form action="/account/authenticate/" method="post" id="login_form">
 {% endif %}
   {% csrf_token %}
   <input type="text" name="username" value="" placeholder="Notendanafn" />
