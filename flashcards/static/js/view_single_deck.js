@@ -60,14 +60,12 @@ top_el.delegate(".answer button", "click", function(e) {
 
     $.ajax({
         type: "POST",
-        url: "/" + card_id + "/",
+        url: "/" + card_id + "/" + session_id + "/" + cards.length + "/",
         data: $("#hidden").serialize(),
         success: function() {
             updateCardView(ans_value);
-            console.log("Jibbí!");
         },
         error: function() {
-            console.log("Jabbú!");
         }
     });
 });

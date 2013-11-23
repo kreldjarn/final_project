@@ -31,23 +31,72 @@ class view_decks(LoginRequiredMixin, View):
 
 class deck(LoginRequiredMixin, View):
     template_name = "flashcards/view_single_deck.html"
-    time = None
 
     def get(self, request, deck_id):
         decks = Deck.objects.all()
-        cards = Card.objects.filter(deck=deck_id)
         deck = Deck.objects.get(pk=deck_id)
-        time = timezone.now()
+        
+        # We check whether there is an active Session for this user and deck,
+        # and if so, we load the corresponding cards. That is, the user is not
+        # given cards they have already answered in this session.
+        try:
+            session = Session.objects.get(user=request.user, deck=deck_id, active=True)
+            current = session.card.pk
+            cards = Card.objects.filter(deck=deck_id, pk__gt=current)
+            
+            # Safety valve, if for some reason cards has been cleared, but
+            # session not set to active=False
+            if not cards:
+                session.active = False
+                cards = Card.objects.filter(deck=deck_id)
+                current = cards[:1].get()
+                session = Session(**{'user': request.user, 'deck': deck, 'card': current})
+                session.save()
+        # If not, we create a new Session
+        except Session.DoesNotExist:
+            cards = Card.objects.filter(deck=deck_id)
+            try:
+                current = cards[:1].get()
+                session = Session(**{'user': request.user, 'deck': deck, 'card': current})
+                session.save()
+            # If current stack is empty:
+            except Card.DoesNotExist:
+                return HttpResponse("Bjakk!")
+
+        session_id = session.pk
         return render(request, self.template_name, locals())
 
-    def post(self, request, deck_id):
-        card_id = deck_id
+    # This function receives an AJAX POST and updates the session and answer
+    # ratio of the card.
+    # A touch of security through obscurity here.
+    # Ugly hack, fix later.
+    def post(self, request, card_id, session_id, is_last):
+        session = Session.objects.get(pk=session_id)
+        if request.user != session.user or not session.active:
+            return HttpResponse("Skamm!")
         card = Card.objects.get(pk=card_id)
         card.asked += 1
+        
+        try:
+            answer = Answers.objects.get(session=session, card=card)
+            not_answered = False
+        except Answers.DoesNotExist:
+            answer = Answers(**{'session': session, 'card': card})
+            not_answered = True
+            session.card = card
+
         ans = request.POST.get("svar")
-        if (ans == "rangt"):
+        if ans == "rangt":
+            if not_answered:
+                answer.right = False
             card.wrong +=1
+        if not_answered:
+            answer.save()
         card.save()
+
+        if is_last == '1':
+            session.active = False
+        session.save()
         return HttpResponse()
 
 class create_deck(LoginRequiredMixin, View):
@@ -60,9 +109,7 @@ class create_deck(LoginRequiredMixin, View):
         objects = []
         # If the posted item is a stack and not a card
         if request.POST.get("stafli"):
-            print("here")
             data = json.loads(request.POST.get("stafli"))[0]
-            print(data)
             # Escape HTML-elements from our strings
             # (Not strictly necessary)
             data['fields']['creator'] = User.objects.get(pk=request.user.pk)

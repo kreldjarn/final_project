@@ -9,7 +9,7 @@ class SkraningarForm(UserCreationForm):
 		model = User
 		fields = ('username', 'email', 'password1', 'password2')
     
-    # Vistum sjalfkrafa, nema annad se tekid fram i fallskallinu
+    # Automatically saved, unless otherwise specified in the call
 	def save(self, commit=True):
 		user = super(SkraningarForm, self).save(commit=False)
 		user.email = self.cleaned_data['email']
