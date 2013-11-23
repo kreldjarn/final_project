@@ -30,10 +30,17 @@ class Card(models.Model):
         return self.question
 
 # Session logs when a user initiates a new session for a deck
+# Needs to be rewritten when we add localstorage functionality.
 class Session(models.Model):
     user = models.ForeignKey(User)
     deck = models.ForeignKey(Deck)
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now_add=True)
+    finished = models.DateField(auto_now=True)
+    # active denotes whether the entire deck has been cleared during
+    # this session.
+    active = models.BooleanField(default=True)
+    # index is the index at which the user is currently in the session
+    card = models.ForeignKey(Card)
 
 # Answers logs the answers of each session
 class Answers(models.Model):
