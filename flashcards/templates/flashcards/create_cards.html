@@ -6,6 +6,8 @@
 
 {% block meginmal %}
 	<h1>Spjöld í staflanum {{ currentDeck.name }}</h1>
+	<input type="checkbox" name="togglePublic" id="togglePublic" {% if currentDeck.public %}checked{% endif %} />
+	<label for="togglePublic">Sýnilegur almúganum</label>
 
 	<form id="nytt_spjald" name="nytt_spjald">
 		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autocomplete="off" autofocus />

@@ -5,21 +5,10 @@ from django.core import serializers
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
 from flashcards.models import *
-import json
 from braces.views import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
-
-def to_base(q, alphabet):
-    if q < 0: raise ValueError, "must supply a positive integer"
-    l = len(alphabet)
-    converted = []
-    while q != 0:
-        q, r = divmod(q, l)
-        converted.insert(0, alphabet[r])
-    return "".join(converted) or '0'
-
-def to36(q):
-    return to_base(q, '0123456789abcdefghijklmnopqrstuvwxyz')
+import json
 
 class view_decks(LoginRequiredMixin, View):
     template_name = "flashcards/view_decks.html"
@@ -31,6 +20,14 @@ class view_decks(LoginRequiredMixin, View):
 
 class deck(LoginRequiredMixin, View):
     template_name = "flashcards/view_single_deck.html"
+
+    # Creates a new session for the current user for deck_id,
+    # starting from the first card in the deck
+    def createSession(self, deck, cards):
+        current = cards[:1].get()
+        session = Session(**{'user': self.request.user, 'deck': deck, 'card': current})
+        session.save()
+        return session
 
     def get(self, request, deck_id):
         decks = Deck.objects.all()
@@ -49,20 +46,31 @@ class deck(LoginRequiredMixin, View):
             if not cards:
                 session.active = False
                 cards = Card.objects.filter(deck=deck_id)
-                current = cards[:1].get()
-                session = Session(**{'user': request.user, 'deck': deck, 'card': current})
-                session.save()
+                session = self.createSession(deck, cards)
         # If not, we create a new Session
         except Session.DoesNotExist:
             cards = Card.objects.filter(deck=deck_id)
             try:
-                current = cards[:1].get()
-                session = Session(**{'user': request.user, 'deck': deck, 'card': current})
-                session.save()
+                session = self.createSession(deck, cards)
             # If current stack is empty:
             except Card.DoesNotExist:
                 return HttpResponse("Bjakk!")
 
+        except Session.MultipleObjectsReturned:
+            sessions = Session.objects.filter(user=request.user, deck=deck_id, active=True)
+            for s in sessions:
+                answers = Answers.objects.filter(session=s)
+                if not answers:
+                    s.delete()
+                else:
+                    s.active = False
+                    s.save()
+            cards = Card.objects.filter(deck=deck_id)
+            session = self.createSession(deck, cards)
+
+        creator = False
+        if request.user == deck.creator:
+            creator = True
         session_id = session.pk
         return render(request, self.template_name, locals())
 
@@ -102,6 +110,7 @@ class deck(LoginRequiredMixin, View):
 class create_deck(LoginRequiredMixin, View):
     template_name = "flashcards/create_deck.html"
     def get(self, request):
+        decks = Deck.objects.all()
         return render(request, self.template_name, locals())
 
     # This method is used to create both Deck entries and Card entries
@@ -131,16 +140,32 @@ class create_cards(LoginRequiredMixin, View):
     template_name = "flashcards/create_cards.html"
 
     def get(self, request, deck_id):
+        decks = Deck.objects.all()
         currentDeck = get_object_or_404(Deck, pk=deck_id)
         # Check whether current user created the requested stack
         if request.user == currentDeck.creator:
-            print("typpo")
             cards = Card.objects.filter(deck=currentDeck).order_by('-pk')
             return render(request, self.template_name, locals())
-        # If not, we tell the off (Change later)
+        # If not, we tell them off (Change later)
         return HttpResponse("Skamm!")
 
     # We use the POST-method from create_deck to create cards
+
+# Toggles the public-status of a deck, if and only if
+# the user who created the deck calls it.
+@login_required
+def togglePublic(request, deck_id, public_status):
+    deck = Deck.objects.get(pk=deck_id)
+    if deck.creator == request.user:
+        if public_status == '0':
+            deck.public = False
+        else:
+            deck.public = True
+        print(deck.public)
+        deck.save()
+        return HttpResponse()
+    else:
+        return HttpResponse()
 
 class edit_card(LoginRequiredMixin, View):
     def post(self, request, card_id=None):

@@ -24,31 +24,33 @@
       <h2>Staflar</h2>
       {% block stacks %} 
         {% for d in decks %}
-        <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
-          <ul class="stack">
-            <li>
-              <div class="stack-card"></div>
-            </li> 
-            <li> 
-              <div class="stack-card"></div>
-            </li> 
-            <li> 
-              <div class="stack-card"></div>
-            </li> 
-            <li> 
-              <div class="stack-card"></div>
-            </li> 
-            <li> 
-              <div class="stack-card"></div>
-            </li> 
-            <li> 
-              <div class="stack-card"></div>
-            </li>
-          </ul>
-          <p>
-            {{ d.name }}
-          </p>
-        </a>
+          {% if d.public %}
+            <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
+              <ul class="stack">
+                <li>
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li>
+              </ul>
+              <p>
+                {{ d.name }}
+              </p>
+            </a>
+          {% endif %}
         {% endfor %}
       {% endblock %}
     </section>

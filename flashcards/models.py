@@ -12,8 +12,8 @@ class Deck(models.Model):
 
 class Card(models.Model):
     deck = models.ForeignKey(Deck)
-    question = models.CharField(max_length=300)
-    answer = models.CharField(max_length=300)
+    question = models.CharField(max_length=140)
+    answer = models.CharField(max_length=140)
 
     # asked counts number of times flashcard has appeared
     # wrong counts wrong answers or skips for this question
@@ -42,7 +42,6 @@ class Session(models.Model):
     # index is the index at which the user is currently in the session
     card = models.ForeignKey(Card)
 
-# Answers logs the answers of each session
 class Answers(models.Model):
     session = models.ForeignKey(Session)
     card = models.ForeignKey(Card)

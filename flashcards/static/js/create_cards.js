@@ -1,9 +1,13 @@
+// Variables
+// =============================================================================
 var form_element = $("form#nytt_spjald");
 var question_input = form_element.find('input#spurning');
 var answer_input = form_element.find('input#svar');
 
 var enter_keycode = 13;
 
+// Event Binding
+// =============================================================================
 $(question_input).on('keydown', function (e) {
 	if(e.which === enter_keycode)
 	{
@@ -30,6 +34,22 @@ form_element.submit( function (e) {
 	createCards(e, form_element);
 });
 
+$('#togglePublic').change(function(e)
+{
+	var checked;
+	if ($(this).is(':checked'))
+		checked = 1;
+	else
+		checked = 0;
+	console.log(checked);
+	$.ajax({
+		type: "GET",
+		url: "/create/" + deck_id + "/" + checked + "/"
+	})
+});
+
+// Functions
+// =============================================================================
 function createCards(e, form_element)
 {
 	e.preventDefault();

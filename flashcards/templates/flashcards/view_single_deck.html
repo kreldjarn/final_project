@@ -5,6 +5,9 @@
 
 {% block meginmal %}
   <h1>{{ deck.name }}</h1>
+    {% if creator %}
+      <a href="/create/{{ deck.id }}/">Breyta stafla</a>
+    {% endif %}
     <section id="cards">
       
     </section>
