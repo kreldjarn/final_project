@@ -44,8 +44,11 @@ $('#togglePublic').change(function(e)
 	console.log(checked);
 	$.ajax({
 		type: "GET",
-		url: "/create/" + deck_id + "/" + checked + "/"
-	})
+		url: "/create/" + deck_id + "/" + checked + "/",
+		success: function(data){
+			location.reload();
+		}
+	});
 });
 
 // Functions

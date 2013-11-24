@@ -58,6 +58,36 @@
       {% block meginmal %}Ekkert efni til staðar{% endblock %}
     </section>
     <section id="right">
+      <h2>Þínir staflar</h2>
+      {% for d in decks %}
+        {% if d.creator == user %}
+            <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
+              <ul class="stack">
+                <li>
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li> 
+                <li> 
+                  <div class="stack-card"></div>
+                </li>
+              </ul>
+              <p>
+                {{ d.name }}
+              </p>
+            </a>
+        {% endif %}
+      {% endfor %}
       {% block right %} {% endblock %}
     </section>
   </section>

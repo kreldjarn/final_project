@@ -15,6 +15,7 @@ class view_decks(LoginRequiredMixin, View):
     
     def get(self, request):
         decks = Deck.objects.all()
+        user = request.user
         decks_created_by_current_user = Deck.objects.filter(creator=request.user)
         return render(request, self.template_name, locals())
 
@@ -31,6 +32,7 @@ class deck(LoginRequiredMixin, View):
 
     def get(self, request, deck_id):
         decks = Deck.objects.all()
+        user = request.user
         deck = Deck.objects.get(pk=deck_id)
         
         # We check whether there is an active Session for this user and deck,
@@ -111,6 +113,7 @@ class create_deck(LoginRequiredMixin, View):
     template_name = "flashcards/create_deck.html"
     def get(self, request):
         decks = Deck.objects.all()
+        user = request.user
         return render(request, self.template_name, locals())
 
     # This method is used to create both Deck entries and Card entries
@@ -141,6 +144,7 @@ class create_cards(LoginRequiredMixin, View):
 
     def get(self, request, deck_id):
         decks = Deck.objects.all()
+        user = request.user
         currentDeck = get_object_or_404(Deck, pk=deck_id)
         # Check whether current user created the requested stack
         if request.user == currentDeck.creator:
