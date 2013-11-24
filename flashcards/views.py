@@ -58,6 +58,8 @@ class deck(LoginRequiredMixin, View):
             except Card.DoesNotExist:
                 return HttpResponse("Bjakk!")
 
+        # A bit of a dirty hack, should be rectified once session system is
+        # rewritten
         except Session.MultipleObjectsReturned:
             sessions = Session.objects.filter(user=request.user, deck=deck_id, active=True)
             for s in sessions:
@@ -125,7 +127,7 @@ class create_deck(LoginRequiredMixin, View):
             # Escape HTML-elements from our strings
             # (Not strictly necessary)
             data['fields']['creator'] = User.objects.get(pk=request.user.pk)
-            data['fields']['name'] = escape(data['fields']['name'])
+            data['fields']['name'] = escape(data['fields']['name'])[:75]
             deck = Deck(**data['fields'])
             deck.save()
             pk = str(deck.pk)
@@ -135,6 +137,8 @@ class create_deck(LoginRequiredMixin, View):
         elif request.POST.get("spjald"):
             for o in serializers.deserialize("json", request.POST.get("spjald")):
                 if (o.object.question and o.object.answer):
+                    o.object.question = o.object.question[:140]
+                    o.object.answer = o.object.answer[:140]
                     o.save()
                     objects.append(o.object)
             return HttpResponse(serializers.serialize('json', objects), content_type='application/json')

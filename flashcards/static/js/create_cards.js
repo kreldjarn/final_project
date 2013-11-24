@@ -46,7 +46,7 @@ $('#togglePublic').change(function(e)
 		type: "GET",
 		url: "/create/" + deck_id + "/" + checked + "/",
 		success: function(data){
-			location.reload();
+			//location.reload();
 		}
 	});
 });
