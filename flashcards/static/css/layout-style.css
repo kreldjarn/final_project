@@ -52,8 +52,6 @@ body
 
 	#main .stack-button
 	{
-		-webkit-transform: scale(0.8);
-		background: red;
 		float: left;
 		margin: 0 10px 10px 0;
 	}
@@ -74,6 +72,7 @@ body
 			height: 30px;
 			display: block;
 			width: calc(100%-2px);
+			box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 			-webkit-transform-origin: 50% 100%;
 			-webkit-transform: perspective(30px) rotateX(22deg);
 		}
@@ -86,6 +85,13 @@ body
 			color: rgb(255, 255, 255);
 			margin: 34px 0 0 0;
 		}
+
+ul#tilbuin_spjold form
+{
+	margin: 0;
+	padding: 0;
+	border: none;
+}
 
 .stack-button
 {
@@ -366,7 +372,7 @@ form
 	border-bottom: 4px solid rgb(143, 182, 190);
 }
 
-	form.hidden
+	form.hidden, form#hidden
 	{
 		display: none;
 	}

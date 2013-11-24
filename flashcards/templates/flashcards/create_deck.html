@@ -3,7 +3,7 @@
 
 
 {% block meginmal %}
-<article id="content">
+<h1>Nýr stafli</h1>
   <form id="nyr_stafli" name="nyr_stafli">
     <input type="text" placeholder="Nafn stafla" id="nafn" name="nafn" autofocus />
     <input type="Submit" value="Smíða stafla" />
@@ -13,7 +13,6 @@
     {% csrf_token %}
     <input id="stafli" type="hidden" value="" name="stafli" />
   </form>
-</article>
 {% endblock %}
 
 {% block skriptur %}
