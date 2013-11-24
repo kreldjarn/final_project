@@ -3,7 +3,7 @@
 <html lang="is">
 <head>
   <meta charset="utf-8">
-  <title>{% block titill %}staf.li{% endblock %}</title>
+  <title>staf.li — {% block titill %}{% endblock %}</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" ></script>
   <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
@@ -15,16 +15,24 @@
 
 <body>
   <nav id="menu">
-    <a class="button" href="/">Skoða stokk</a>
-    <a class="button" href="/create/">Smíða stokk</a>
+    <div class="wrap">
+      {% if user.pk %}
+      <a class="button" href="/">Heim</a>
+      <a class="button" href="/create/">Nýr stafli</a>
+      <span class="">Notandi: {{ user }}</span>
+      <a class="logout" href="/account/logout/">Skrá út</a>
+      {% else %}
+      <a class="login" href="/account/login/">Skrá inn</a>
+      {% endif %}
+    </div>
   </nav>
 
   <section id="wrap">
     <section id="stacks">
-      <h2>Staflar</h2>
-      {% block stacks %} 
-        {% for d in decks %}
-          {% if d.public %}
+      {% block stacks %}
+      <h2>Þínir staflar</h2>
+      {% if decks_created_by_current_user %}
+        {% for d in decks_created_by_current_user %}
             <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
               <ul class="stack">
                 <li>
@@ -50,48 +58,30 @@
                 {{ d.name }}
               </p>
             </a>
-          {% endif %}
         {% endfor %}
+      {% else %}
+      <p>Þú hefur ekki búið til neinn stafla ennþá.</p>
+      {% endif %}
+      <a href="/create" class="create_button">+</a>
       {% endblock %}
     </section>
     <section id="main">
       {% block meginmal %}Ekkert efni til staðar{% endblock %}
     </section>
     <section id="right">
-      <h2>Þínir staflar</h2>
-      {% for d in decks %}
-        {% if d.creator == user %}
-            <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
-              <ul class="stack">
-                <li>
-                  <div class="stack-card"></div>
-                </li> 
-                <li> 
-                  <div class="stack-card"></div>
-                </li> 
-                <li> 
-                  <div class="stack-card"></div>
-                </li> 
-                <li> 
-                  <div class="stack-card"></div>
-                </li> 
-                <li> 
-                  <div class="stack-card"></div>
-                </li> 
-                <li> 
-                  <div class="stack-card"></div>
-                </li>
-              </ul>
-              <p>
-                {{ d.name }}
-              </p>
-            </a>
-        {% endif %}
-      {% endfor %}
-      {% block right %} {% endblock %}
+      {% block right %}{% endblock %}
     </section>
   </section>
-</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45991243-1', 'staf.li');
+  ga('send', 'pageview');
+</script>
 <script src="{% static 'js/flash_cards.js' %}"></script>
 {% block skriptur %}{% endblock %}
+</body>
 </html>

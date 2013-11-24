@@ -1,7 +1,7 @@
 {% extends 'flashcards/flashcards_base.html' %}
 {% load staticfiles %}
 
-{% block title %}Stokkur: {{ deck.name }}{% endblock %}
+{% block title %}{{ deck.name }}{% endblock %}
 
 {% block meginmal %}
   <h1>{{ deck.name }}</h1>
@@ -15,6 +15,10 @@
       {% csrf_token %}
       <input type="hidden" value="" id="svar" name="svar" />
     </form>
+{% endblock %}
+
+{% block right %}
+<h2>Þessi stafli</h2>
 {% endblock %}
 
 {% block skriptur %}

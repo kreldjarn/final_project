@@ -3,16 +3,35 @@
 
 
 {% block meginmal %}
-<select id="selectDeck">
-  <option>Veldu bunka</option>
-  {% for d in decks %}
-  <option value="{{ d.id }}">{{ d.name }}</option>
-  {% endfor %}
-</select>
-<h1>Staflar sem þér hafið smíðað:</h1>
 <ul>
-	{% for d in decks_created_by_current_user %}
-	<li>{{ d.name }} - {{ d.id }}</li>
+	{% for d in decks %}
+	{% if d.public %}
+		<a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
+        	<ul class="stack">
+        	  <li>
+        	    <div class="stack-card"></div>
+        	  </li> 
+        	  <li> 
+        	    <div class="stack-card"></div>
+        	  </li> 
+        	  <li> 
+        	    <div class="stack-card"></div>
+        	  </li> 
+        	  <li> 
+        	    <div class="stack-card"></div>
+        	  </li> 
+        	  <li> 
+        	    <div class="stack-card"></div>
+        	  </li> 
+        	  <li> 
+        	    <div class="stack-card"></div>
+        	  </li>
+        	</ul>
+        	<p>
+        	  {{ d.name }}
+        	</p>
+        </a>
+	{% endif %}
 	{% endfor %}
 </ul>
 {% endblock %}

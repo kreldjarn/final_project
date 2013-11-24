@@ -3,8 +3,14 @@
 	background: rgb(105, 157, 168);
 }
 
+a
+{
+	color: rgb(75, 127, 138);
+}
+
 body
 {
+	color: #333;
 	font-family: 'Open Sans';
 	min-width: 1120px;
 	background: rgb(136, 207, 206);
@@ -25,19 +31,34 @@ body
 	margin: 0px 20px 0px 0px;
 	float: left;
 	z-index: -1;
+	min-height: 10px;
+	display: block;
 }
 
-	#stacks ul.stack
+	ul.stack
 	{
 		z-index: 0 !important;
 		position: relative;
 		margin: 0px auto;
-		width: 82px;
 		padding: 0px;
 		list-style: none;
 	}
 
-	#stacks ul.stack li
+	.stack-button
+	{
+		width: 82px;
+		margin: auto;
+	}
+
+	#main .stack-button
+	{
+		-webkit-transform: scale(0.8);
+		background: red;
+		float: left;
+		margin: 0 10px 10px 0;
+	}
+
+	ul.stack li
 	{
 		width: 80px;
 		height: 4px;
@@ -45,7 +66,7 @@ body
 		overflow: visible;
 	}
 
-		#stacks ul.stack li .stack-card
+		ul.stack li .stack-card
 		{
 			position: relative;
 			top: 0;
@@ -57,7 +78,7 @@ body
 			-webkit-transform: perspective(30px) rotateX(22deg);
 		}
 
-		#stacks p
+		.stack-button p
 		{
 			font-size: 0.8em;
 			width: 100%;
@@ -108,6 +129,13 @@ nav
 	z-index: 1000;
 }
 
+nav .wrap
+{
+	width: 1020px;
+	display: block;
+	margin: 0px auto;
+}
+
 #main
 {
 	float: left;
@@ -120,79 +148,81 @@ nav
 		-webkit-user-select: none;
 	}
 
-		#main #options
-		{
+button
+{
+	font-size: 2.2em;
+	margin: 0 20px 0 0;
+	display: inline-block;
+	width: 70px;
+	height: 50px;
+	text-align: center;
+	vertical-align: top;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	border: none;
+	background: #FFF;
+	outline: none;
+}
 
-		}
-			button
-			{
-				font-size: 2.2em;
-				margin: 0 20px 0 0;
-				display: inline-block;
-				width: 70px;
-				height: 50px;
-				text-align: center;
-				vertical-align: top;
-				color: rgb(255, 255, 255);
-				cursor: pointer;
-				border: none;
-				background: #FFF;
-				outline: none;
-			}
+	button:last-child
+	{
+		margin: 0;
+	}
 
-				button:last-child
-				{
-					margin: 0;
-				}
+	button.small
+	{
+		width: 50px;
+		height: 35px;
+		border: none;
+		font-size: 0.8em;
+	}
 
-				button.small
-				{
-					width: 50px;
-					height: 35px;
-					border: none;
-					font-size: 0.8em;
-				}
+.green
+{
+	border-color: #32cd32 !important;
+	color: #32cd32 !important;
+	background: #befebe !important;
+}
 
-				.green
-				{
-					border-color: #32cd32 !important;
-					color: #32cd32 !important;
-					background: #befebe !important;
-				}
+.red
+{
+	border-color: #cd3238 !important;
+	color: #cd3238 !important;
+	background: #ffb3b9 !important;
+}
 
-				.red
-				{
-					border-color: #cd3238 !important;
-					color: #cd3238 !important;
-					background: #ffb3b9 !important;
-				}
+	button.delete
+	{
 
-				button.delete
-				{
+		padding: 3px 5px 5px 5px;
+		margin: 17px 0px 10px 10px;
+		vertical-align: center;
+		font-size: 1em;
+		line-height: 0.9em;
+		width: auto;
+		height: auto;
+	}
 
-					padding: 3px 5px 5px 5px;
-					margin: 17px 0px 10px 10px;
-					vertical-align: center;
-					font-size: 1em;
-					line-height: 0.9em;
-					width: auto;
-					height: auto;
-				}
+	button:hover
+	{
+		/*box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.2);*/
+	}
 
-				button:hover
-				{
-					/*box-shadow: 0 0.1em 0.3em rgba(0, 0, 0, 0.2);*/
-				}
+	button:active
+	{
 
-				button:active
-				{
-
-				}
+	}
 
 #right
 {
 	width: 188px;
 	float: left;
+}
+
+#cards
+{
+	min-height: 350px;
+	display: block;
 }
 
 #cards .container
@@ -327,6 +357,61 @@ nav
 .clear
 {
 	clear: both;
+}
+
+form
+{
+	margin-bottom: 10px;
+	padding-bottom: 20px;
+	border-bottom: 4px solid rgb(143, 182, 190);
+}
+
+	form.hidden
+	{
+		display: none;
+	}
+
+	form input[type=text], form input[type=password]
+	{
+		background: rgb(255, 255, 255);
+		width: calc(100% - 20px);
+		font-size: 1.5em;
+		border: none;
+		padding: 10px;
+		font-family: inherit;
+		margin: 0 0 10px 0;
+		outline: none;
+	}
+
+	form input[type=submit]
+	{
+
+		border: none;
+		padding: 10px;
+		background: #fff;
+		font-size: 1.5em;
+		font-family: inherit;
+		background: rgb(105, 157, 168);
+		margin: 0;
+		width: 100%;
+		cursor: pointer;
+		color: #FFF;
+		outline: none;
+	}
+
+		form input[type=submit]:active
+		{
+			background: rgb(95, 147, 158);
+		}
+
+p.signup_now
+{
+	color: #FFF;
+}
+
+form[type=hidden]
+{
+	display: none;
 }
 
 h1
