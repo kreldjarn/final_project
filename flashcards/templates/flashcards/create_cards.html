@@ -52,8 +52,8 @@
 <script type="text/template" id="edit_card_view">
 	<li id="<%= id %>">
 		<form name="<%= id %>">
-			<input type="text" value="<%= question %>" name="question" />
-			<input type="text" value="<%= answer %>" name="answer" />
+			<input maxlength="140" type="text" value="<%= question %>" name="question" />
+			<input maxlength="140" type="text" value="<%= answer %>" name="answer" />
 			<input type="checkbox" name="visible" <%= checked %> />
 			<button class="delete red small">×</button>
 		</form>
