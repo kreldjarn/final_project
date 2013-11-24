@@ -59,4 +59,4 @@ class logged(View):
 
 class invalid(View):
 	def get(self, request):
-		return render_to_response('accounts/invalid.html')	
+		return render_to_response('accounts/invalid.html')
