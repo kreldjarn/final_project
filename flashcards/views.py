@@ -96,22 +96,20 @@ class deck(LoginRequiredMixin, View):
             return HttpResponse("Skamm!")
         card = Card.objects.get(pk=card_id)
         card.asked += 1
-        
+        ans = request.POST.get("svar")
+
         try:
             answer = Answers.objects.get(session=session, card=card)
-            not_answered = False
         except Answers.DoesNotExist:
             answer = Answers(**{'session': session, 'card': card})
-            not_answered = True
-            session.card = card
-
-        ans = request.POST.get("svar")
-        if ans == "rangt":
-            if not_answered:
+            if ans == "rangt":
                 answer.right = False
-            card.wrong +=1
-        if not_answered:
             answer.save()
+            session.card = card
+   
+        if ans == "rangt":
+            card.wrong +=1
+            
         card.save()
 
         if is_last == '1':
