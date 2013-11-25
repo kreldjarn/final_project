@@ -1,6 +1,6 @@
 # Django settings for final_project project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'default.db',
+        'NAME': 'flashcards',
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
