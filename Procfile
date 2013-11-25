@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath final_project final_project.wsgi
