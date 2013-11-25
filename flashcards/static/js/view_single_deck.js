@@ -84,16 +84,11 @@ function removeTopCard()
 function updateCardView(ans_value)
 {
     var card = removeTopCard();
-    var result = "<li>";
-
     if(ans_value === "rangt")
     {
         cards.push(card);
-        result += "rangt</li>";
     }
-    else
-        result += "rétt</li>";
 
-    $('#results').append(result);
+    //$('#results').append(result);
     showCards();
 }

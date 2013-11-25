@@ -142,6 +142,20 @@ nav .wrap
 	margin: 0px auto;
 }
 
+nav#menu a.logo
+{
+	font-size: 2em;
+	text-decoration: none;
+	font-weight: bold;
+	color: #FFF;
+	margin: 20px 20px 20px 0;
+}
+
+	nav#menu a.logo:hover
+	{
+		color: rgba(255, 255, 255, 0.8);
+	}
+
 #main
 {
 	float: left;
@@ -420,6 +434,21 @@ form[type=hidden]
 	display: none;
 }
 
+a.create_button
+{
+	font-size: 1.5em;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 24px;
+
+	display: block;
+	width: 30px;
+	height: 30px;
+	float: right;
+	margin: 0px 45px 0 0;
+	text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.1);
+}
+
 h1
 {
 	font-weight: normal;
@@ -432,8 +461,7 @@ h1
 h2
 {
 	font-weight: normal;
-	margin: 16px 10px 30px 10px;
+	margin: 16px 0px 30px 0px;
 	color: rgb(255, 255, 255);
 	font-size: 1.2em;
-	text-align: center;
 }

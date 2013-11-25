@@ -19,11 +19,15 @@
     {% if creator %}
       <a href="/create/{{ deck.id }}/">Breyta</a>
     {% endif %}
-    <ul id="results">
+      <a class="stack-button">
+        <ul class="stack">
     {% for a in answered %}
-    <li>{% if a.right %}rétt{% else %}rangt{% endif %}</li>
+          <li>
+            <div class="stack-card {% if a.right %}rétt{% else %}rangt{% endif %}"></div>
+          </li>
     {% endfor %}
-    </ul>
+        </ul>
+      </a>
 {% endblock %}
 
 {% block skriptur %}

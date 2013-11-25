@@ -6,7 +6,7 @@
   <title>staf.li — {% block titill %}{% endblock %}</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" ></script>
-  <link href='https://fonts.googleapis.com/css?family=Fauna+One|Open+Sans' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link type="text/css" rel="stylesheet" href="{% static 'css/layout-style.css' %}" />
   <link type="text/css" rel="stylesheet" href="{% static 'css/colors.css' %}" />
 
@@ -16,8 +16,8 @@
 <body>
   <nav id="menu">
     <div class="wrap">
+      <a class="logo" href="/">staf.li</a>
       {% if user.pk %}
-      <a class="button" href="/">Heim</a>
       <a class="button" href="/create/">Nýr stafli</a>
       <span class="">Notandi: {{ user }}</span>
       <a class="logout" href="/account/logout/">Skrá út</a>
@@ -30,7 +30,8 @@
   <section id="wrap">
     <section id="stacks">
       {% block stacks %}
-      <h2>Þínir staflar</h2>
+      {% if user.pk %}
+      <h2>Þínir staflar<a href="/create" class="create_button">+</a></h2>
       {% if decks_created_by_current_user %}
         {% for d in decks_created_by_current_user %}
             <a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
@@ -62,7 +63,8 @@
       {% else %}
       <p>Þú hefur ekki búið til neinn stafla ennþá.</p>
       {% endif %}
-      <a href="/create" class="create_button">+</a>
+
+      {% endif %}
       {% endblock %}
     </section>
     <section id="main">
