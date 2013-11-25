@@ -19,7 +19,7 @@
     {% if creator %}
       <a href="/create/{{ deck.id }}/">Breyta</a>
     {% endif %}
-    <ul>
+    <ul id="results">
     {% for a in answered %}
     <li>{% if a.right %}rétt{% else %}rangt{% endif %}</li>
     {% endfor %}
