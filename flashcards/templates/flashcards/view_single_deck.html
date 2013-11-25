@@ -19,6 +19,11 @@
     {% if creator %}
       <a href="/create/{{ deck.id }}/">Breyta</a>
     {% endif %}
+    <ul>
+    {% for a in answered %}
+    <li>{% if a.right %}rétt{% else %}rangt{% endif %}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block skriptur %}

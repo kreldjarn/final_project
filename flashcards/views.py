@@ -35,6 +35,8 @@ class deck(LoginRequiredMixin, View):
         user = request.user
         decks_created_by_current_user = Deck.objects.filter(creator=user)
         deck = Deck.objects.get(pk=deck_id)
+
+        answered = []
         
         # We check whether there is an active Session for this user and deck,
         # and if so, we load the corresponding cards. That is, the user is not
@@ -43,6 +45,7 @@ class deck(LoginRequiredMixin, View):
             session = Session.objects.get(user=request.user, deck=deck_id, active=True)
             current = session.card.pk
             cards = Card.objects.filter(deck=deck_id, pk__gt=current)
+            answered = Answers.objects.filter(session=session, card__lte=current)
             
             # Safety valve, if for some reason cards has been cleared, but
             # session not set to active=False
