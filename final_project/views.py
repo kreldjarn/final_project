@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, render
 from django.contrib import auth
 #from django.contrib.auth.forms import UserCreationForm
@@ -15,10 +15,15 @@ class register(View):
 		return render_to_response('accounts/register.html', args)
 
 	def post(self, request):
-		form = SkraningarForm(request.POST)
-		if form.is_valid():
-			form.save()
+		filled_form = SkraningarForm(request.POST)
+		if filled_form.is_valid():
+			filled_form.save()
 			return HttpResponseRedirect('/account/success/')
+		args = {}
+		args.update(csrf(request))
+		args['form'] = SkraningarForm()
+		args['filled_form'] = filled_form
+		return render_to_response('accounts/register.html', args)
 
 class success(View):
 	def get(self, request):

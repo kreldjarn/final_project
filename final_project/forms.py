@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*- 
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 class SkraningarForm(UserCreationForm):
-	email = forms.EmailField(required=True)
+	email = forms.EmailField(required=True, max_length=45, label="", widget=forms.TextInput(attrs={'placeholder': 'Netfang'}))
+	username = forms.RegexField(required=True, max_length=30,
+        regex=r'^[\w.@+-]+$', label="", widget=forms.TextInput(attrs={'placeholder': 'Notandanafn'}))
+	password1 = forms.CharField(required=True, max_length=45, label=(""),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Lykilorð'}))
+	password2 = forms.CharField(required=True, max_length=45, label=(""),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Lykilorð endurtekið'}))
 
 	class Meta:
 		model = User
