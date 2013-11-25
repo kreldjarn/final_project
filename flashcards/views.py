@@ -60,7 +60,7 @@ class deck(LoginRequiredMixin, View):
                 session = self.createSession(deck, cards)
             # If current stack is empty:
             except Card.DoesNotExist:
-                return HttpResponse("Bjakk!")
+                session = None
 
         # A bit of a dirty hack, should be rectified once session system is
         # rewritten
@@ -79,7 +79,11 @@ class deck(LoginRequiredMixin, View):
         creator = False
         if request.user == deck.creator:
             creator = True
-        session_id = session.pk
+
+        if session:
+            session_id = session.pk
+        else:
+            session_id = None
         return render(request, self.template_name, locals())
 
     # This function receives an AJAX POST and updates the session and answer
