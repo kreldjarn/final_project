@@ -1,18 +1,25 @@
 {% extends "flashcards/flashcards_base.html" %}
 
+{% block stacks %}
+{% endblock %}
+
 {% block meginmal %}
 
+<h1>Innskráning</h1>
+
 {% if form.errors %}
-<p>Notendanafn eða lykilorð rangt!</p>
+<p class="error">Notandanafn eða lykilorð rangt!</p>
 {% endif %}
+
 {% if next %}
 <form action="/account/authenticate/?next={{ next }}" method="post" id="login_form">
 {% else %}
 <form action="/account/authenticate/" method="post" id="login_form">
 {% endif %}
   {% csrf_token %}
-  <input type="text" name="username" value="" placeholder="Notendanafn" />
+  <input type="text" name="username" value="" placeholder="Notandanafn" />
   <input type="password" name="password"  value="" placeholder="Lykilorð" />
-  <input type="submit" value="Innritun" />
+  <input type="submit" value="Já takk!" />
 </form>
+<p class="signup_now">Ekki með aðgang? <a href="/account/register/">Endilega fáðu þér!</a></p>
 {% endblock %}

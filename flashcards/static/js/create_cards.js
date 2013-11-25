@@ -1,5 +1,5 @@
 // Variables
-// =============================================================================
+// =============================================================
 var form_element = $("form#nytt_spjald");
 var question_input = form_element.find('input#spurning');
 var answer_input = form_element.find('input#svar');
@@ -7,7 +7,7 @@ var answer_input = form_element.find('input#svar');
 var enter_keycode = 13;
 
 // Event Binding
-// =============================================================================
+// =============================================================
 $(question_input).on('keydown', function (e) {
 	if(e.which === enter_keycode)
 	{
@@ -52,7 +52,7 @@ $('#togglePublic').change(function(e)
 });
 
 // Functions
-// =============================================================================
+// =============================================================
 function createCards(e, form_element)
 {
 	e.preventDefault();
@@ -201,8 +201,6 @@ function prependAddedCard(data)
 	var question = data[0].fields.question;
 	var answer = data[0].fields.answer;
 
-	// Not quite sure how boolean values are returned from server
-	// TODO: fix boolean shiznit
 	var checked = ""
 	if(data[0].fields.visible)
 		checked = "checked";

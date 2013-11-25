@@ -3,7 +3,7 @@
 // Stack cards in reverse order
 $("ul.stack").each(function () {
 	$(this).find("li").each(function (n) {
-        $(this).find(".stack-card").addClass('color' + n).css('z-index', -1-n);
+        $(this).find(".stack-card").addClass('color' + (2*n+1)).css('z-index', -1-n);
     });
 });
 

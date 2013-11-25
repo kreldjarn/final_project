@@ -7,7 +7,7 @@
 {% block meginmal %}
 	<h1>Spjöld í staflanum {{ currentDeck.name }}</h1>
 	<input type="checkbox" name="togglePublic" id="togglePublic" {% if currentDeck.public %}checked{% endif %} />
-	<label for="togglePublic">Sýnilegur almúganum</label>
+	<label for="togglePublic">Stafli sýnilegur öðrum notendum</label>
 
 	<form id="nytt_spjald" name="nytt_spjald">
 		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autocomplete="off" autofocus />
@@ -20,8 +20,8 @@
 			{% if c.active %}
 				<li id="{{ c.id }}">
 					<form name="{{ c.id }}">
-						<input type="text" value="{{ c.question }}" name="question" />
-						<input type="text" value="{{ c.answer }}" name="answer" />
+						<input type="text" value="{{ c.question }}" name="question" maxchars="140"/>
+						<input type="text" value="{{ c.answer }}" name="answer"  maxchars="140" />
 						<input type="checkbox" name="visible" {% if c.visible %}checked{% endif %} />
 						<button class="delete red small">×</button>
 					</form>

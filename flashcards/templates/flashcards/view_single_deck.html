@@ -1,13 +1,10 @@
 {% extends 'flashcards/flashcards_base.html' %}
 {% load staticfiles %}
 
-{% block title %}Stokkur: {{ deck.name }}{% endblock %}
+{% block title %}{{ deck.name }}{% endblock %}
 
 {% block meginmal %}
   <h1>{{ deck.name }}</h1>
-    {% if creator %}
-      <a href="/create/{{ deck.id }}/">Breyta stafla</a>
-    {% endif %}
     <section id="cards">
       
     </section>
@@ -15,6 +12,13 @@
       {% csrf_token %}
       <input type="hidden" value="" id="svar" name="svar" />
     </form>
+{% endblock %}
+
+{% block right %}
+<h2>Þessi stafli</h2>
+    {% if creator %}
+      <a href="/create/{{ deck.id }}/">Breyta</a>
+    {% endif %}
 {% endblock %}
 
 {% block skriptur %}
