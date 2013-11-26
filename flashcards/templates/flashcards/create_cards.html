@@ -6,8 +6,6 @@
 
 {% block meginmal %}
 	<h1>Spjöld í staflanum {{ currentDeck.name }}</h1>
-	<input type="checkbox" name="togglePublic" id="togglePublic" {% if currentDeck.public %}checked{% endif %} />
-	<label for="togglePublic">Stafli sýnilegur öðrum notendum</label>
 
 	<form id="nytt_spjald" name="nytt_spjald">
 		<input type="text" placeholder="Spurning" id="spurning" name="	spurning" autocomplete="off" autofocus />
@@ -34,6 +32,12 @@
 		{% csrf_token %}
 		<input id="spjald" type="hidden" value="" name="spjald" />
 	</form>
+{% endblock %}
+{% block right %}
+<h2>Stillingar</h2>
+	<input type="checkbox" name="togglePublic" id="togglePublic" {% if currentDeck.public %}checked{% endif %} />
+	<label for="togglePublic">Stafli sýnilegur öðrum notendum</label>
+
 {% endblock %}
 
 {% block skriptur %}

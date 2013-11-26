@@ -137,6 +137,7 @@ nav
 
 nav .wrap
 {
+	position: relative;
 	width: 1020px;
 	display: block;
 	margin: 0px auto;
@@ -146,15 +147,45 @@ nav#menu a.logo
 {
 	font-size: 2em;
 	text-decoration: none;
-	font-weight: bold;
+	width: 250px;
+	position: absolute;
+	top: 0;
+	left: 20px;
 	color: #FFF;
-	margin: 20px 20px 20px 0;
+	margin: 2px 20px 20px 0;
+	display: block;
 }
 
 	nav#menu a.logo:hover
 	{
 		color: rgba(255, 255, 255, 0.8);
 	}
+
+	nav#menu span.username
+	{
+		display: block;
+		position: absolute;
+		font-size: 0.8em;
+		right: 120px;
+		top: 16px;
+		color: white;
+	}
+
+	nav#menu a.logout, nav#menu a.login
+	{
+		position: absolute;
+		top: 0px;
+		right: 20px;
+		font-size: 0.8em;
+		text-decoration: none;
+		color: white;
+		padding: 16px;
+	}
+
+		nav#menu a.logout:hover, nav#menu a.login:hover
+		{
+			background: rgba(255, 255, 255, 0.1);
+		}
 
 #main
 {
@@ -184,6 +215,29 @@ button
 	outline: none;
 }
 
+	a.button{
+		
+		border: none;
+		padding: 10px;
+		background: #fff;
+		font-size: 1.5em;
+		font-family: inherit;
+		background: rgb(105, 157, 168);
+		margin: 0;
+		width: 100%;
+		cursor: pointer;
+		color: #FFF;
+		outline: none;
+		text-decoration: none;
+		font-size: 0.8em;
+	}
+
+
+	a.button:active
+	{
+		background: rgb(95, 147, 158);
+	}
+
 	button:last-child
 	{
 		margin: 0;
@@ -196,6 +250,7 @@ button
 		border: none;
 		font-size: 0.8em;
 	}
+
 
 .green
 {
@@ -426,12 +481,18 @@ form
 
 p.signup_now
 {
-	color: #FFF;
+	text-align: center;
 }
-
+	
 form[type=hidden]
 {
 	display: none;
+}
+
+#login_form
+{
+	width: 240px;
+	margin: auto;
 }
 
 a.create_button
@@ -439,14 +500,22 @@ a.create_button
 	font-size: 1.5em;
 	font-weight: bold;
 	text-decoration: none;
-	line-height: 24px;
 
 	display: block;
+	margin: auto;
 	width: 30px;
 	height: 30px;
-	float: right;
-	margin: 0px 45px 0 0;
 	text-shadow: -1px -1px 0px rgba(255, 255, 255, 0.1);
+}
+
+input#togglePublic
+{
+
+}
+
+label[for=togglePublic]
+{
+	font-size: 0.8em;
 }
 
 h1
@@ -460,8 +529,20 @@ h1
 
 h2
 {
+	text-align: center;
 	font-weight: normal;
 	margin: 16px 0px 30px 0px;
 	color: rgb(255, 255, 255);
 	font-size: 1.2em;
+}
+
+@media screen and (max-width: 1020px)
+{
+	#wrap {
+		width: 100%;
+	}
+	#stacks, #main, #right{
+		float: none;
+		width: 100%;
+	}
 }

@@ -102,9 +102,11 @@ function removeTopCard()
 function updateCardView(ans_value)
 {
     var card = removeTopCard();
+    var color = "green";
+
     if(ans_value === "rangt")
     {
         cards.push(card);
+        color = "red";
     }
-    //$('#results').append(result); 
 }
