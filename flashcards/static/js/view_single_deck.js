@@ -57,13 +57,20 @@ top_el.delegate(".answer button", "click", function(e) {
     var ans_value = $(this).attr('data-id');
 
     $("#svar").val(ans_value);
+    updateCardView(ans_value);
+    var card_ids = [];
+    for (var i = 0; i < cards.length; i++)
+    {
+        card_ids.push(cards[i].id);
+    }
+    $("#remaining").val(JSON.stringify(card_ids));
 
     $.ajax({
         type: "POST",
-        url: "/" + card_id + "/" + session_id + "/" + cards.length + "/",
+        url: "/" + card_id + "/" + session_id + "/",
         data: $("#hidden").serialize(),
         success: function() {
-            updateCardView(ans_value);
+            showCards();
         },
         error: function() {
         }
@@ -88,7 +95,5 @@ function updateCardView(ans_value)
     {
         cards.push(card);
     }
-
-    //$('#results').append(result);
-    showCards();
+    //$('#results').append(result); 
 }
