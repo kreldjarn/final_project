@@ -175,6 +175,12 @@ def togglePublic(request, deck_id, public_status):
     else:
         return HttpResponse()
 
+@login_required
+def sessions_for_deck(request, deck_id):
+    sessions = Session.objects.filter(user=request.user, deck=deck_id, active=False)
+    sessions = serializers.serialize('json', sessions)
+    return HttpResponse(sessions)
+
 class edit_card(LoginRequiredMixin, View):
     def post(self, request, card_id=None):
         if card_id != None:

@@ -36,6 +36,17 @@ function showCards()
     console.log("Show cards");
 }
 
+$('#yfirlit').click(function(e)
+{
+    $.ajax({
+        type: "GET",
+        url: "/sessions/" + deck.id + "/",
+        success: function(data) {
+            console.log(data);
+        }
+    });
+});
+
 // Færum þetta e-ð annað. Í raun til að rendera
 // template-ið og spýta út í DOM ið eftir því hvernig
 // röðin á kortunum eru í cards[] JS fylkinu

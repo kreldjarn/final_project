@@ -17,11 +17,10 @@
 
 {% block right %}
 <h2>Þessi stafli</h2>
-    {{ cards }}
-    {{ session_id }}
     {% if creator %}
       <a href="/create/{{ deck.id }}/">Breyta</a>
     {% endif %}
+    <a id="yfirlit">Yfirlit</a>
       <a class="stack-button">
         <ul class="stack">
         </ul>
