@@ -17,13 +17,13 @@
 {% block right %}
 <h2>Þessi stafli</h2>
     {% if creator %}
-      <a href="/create/{{ deck.id }}/">Breyta</a>
+      <a href="/create/{{ deck.id }}/" class="button">Breyta</a>
     {% endif %}
       <a class="stack-button">
         <ul class="stack">
-    {% for a in answered %}
+    {% for a in answers %}
           <li>
-            <div class="stack-card {% if a.right %}rétt{% else %}rangt{% endif %}"></div>
+            <div class="stack-card {% if a.right %}green{% else %}red{% endif %}"></div>
           </li>
     {% endfor %}
         </ul>

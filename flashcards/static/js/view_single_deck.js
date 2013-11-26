@@ -84,11 +84,16 @@ function removeTopCard()
 function updateCardView(ans_value)
 {
     var card = removeTopCard();
+    var color = "green";
+
     if(ans_value === "rangt")
     {
         cards.push(card);
+        color = "red";
     }
 
-    //$('#results').append(result);
+    // Add the card, with corresponding color
+    $("#right ul.stack").prepend('<li><div class="stack-card ' + color + '"></div></li>');
+    fixCardStackingOrder()
     showCards();
 }

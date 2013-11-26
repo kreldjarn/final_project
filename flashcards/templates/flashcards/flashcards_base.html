@@ -18,8 +18,7 @@
     <div class="wrap">
       <a class="logo" href="/">staf.li</a>
       {% if user.pk %}
-      <a class="button" href="/create/">Nýr stafli</a>
-      <span class="">Notandi: {{ user }}</span>
+      <span class="username">{{ user }}</span>
       <a class="logout" href="/account/logout/">Skrá út</a>
       {% else %}
       <a class="login" href="/account/login/">Skrá inn</a>
