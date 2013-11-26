@@ -17,7 +17,7 @@
 <form action="/account/authenticate/" method="post" id="login_form">
 {% endif %}
   {% csrf_token %}
-  <input type="text" name="username" value="" placeholder="Notandanafn" />
+  <input type="text" name="username" value="" placeholder="Notandanafn" autofocus />
   <input type="password" name="password"  value="" placeholder="Lykilorð" />
   <input type="submit" value="Já takk!" />
 </form>

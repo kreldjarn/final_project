@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 class SkraningarForm(UserCreationForm):
 	email = forms.EmailField(required=True, max_length=45, label="", widget=forms.TextInput(attrs={'placeholder': 'Netfang'}))
 	username = forms.RegexField(required=True, max_length=30,
-        regex=r'^[\w.@+-]+$', label="", widget=forms.TextInput(attrs={'placeholder': 'Notandanafn'}))
+        regex=r'^[\w.@+-]+$', label="", widget=forms.TextInput(attrs={'placeholder': 'Notandanafn', 'autofocus': 'true'}))
 	password1 = forms.CharField(required=True, max_length=45, label=(""),
         widget=forms.PasswordInput(attrs={'placeholder': 'Lykilorð'}))
 	password2 = forms.CharField(required=True, max_length=45, label=(""),
