@@ -24,95 +24,87 @@ class deck(LoginRequiredMixin, View):
 
     # Creates a new session for the current user for deck_id,
     # starting from the first card in the deck
-    def createSession(self, deck, cards):
-        current = cards[:1].get()
-        session = Session(**{'user': self.request.user, 'deck': deck, 'card': current})
-        session.save()
-        return session
+    def createSession(self, deck):
+        cards = Card.objects.filter(deck=deck)
+        if cards:
+            card_ids = json.dumps(json.dumps([c.pk for c in cards]))
+            session = Session(**{'user': self.request.user, 'deck': deck, 'remaining': card_ids})
+            session.save()
+            return session
+        # If the stack is empty we don't create a new session
+        return None
 
     def get(self, request, deck_id):
-        decks = Deck.objects.all()
         user = request.user
         decks_created_by_current_user = Deck.objects.filter(creator=user)
         deck = Deck.objects.get(pk=deck_id)
-
-        answered = []
         
         # We check whether there is an active Session for this user and deck,
         # and if so, we load the corresponding cards. That is, the user is not
         # given cards they have already answered in this session.
         try:
             session = Session.objects.get(user=request.user, deck=deck_id, active=True)
-            current = session.card.pk
-            cards = Card.objects.filter(deck=deck_id, pk__gt=current)
-            answered = Answers.objects.filter(session=session, card__lte=current)
-            
-            # Safety valve, if for some reason cards has been cleared, but
-            # session not set to active=False
-            if not cards:
-                session.active = False
-                cards = Card.objects.filter(deck=deck_id)
-                session = self.createSession(deck, cards)
         # If not, we create a new Session
         except Session.DoesNotExist:
-            cards = Card.objects.filter(deck=deck_id)
-            try:
-                session = self.createSession(deck, cards)
-            # If current stack is empty:
-            except Card.DoesNotExist:
-                session = None
+            session = self.createSession(deck)
 
         # A bit of a dirty hack, should be rectified once session system is
         # rewritten
         except Session.MultipleObjectsReturned:
+            session = None
             sessions = Session.objects.filter(user=request.user, deck=deck_id, active=True)
             for s in sessions:
-                answers = Answers.objects.filter(session=s)
-                if not answers:
+                if s.log == None:
                     s.delete()
                 else:
-                    s.active = False
-                    s.save()
-            cards = Card.objects.filter(deck=deck_id)
-            session = self.createSession(deck, cards)
+                    session = s
+                    break
+            if not session:
+                session = self.createSession(deck)
 
         creator = False
         if request.user == deck.creator:
             creator = True
 
-        if session:
+        session_id = None
+        answered = None
+        if session != None:
             session_id = session.pk
-        else:
-            session_id = None
+            res = []
+            remaining = json.loads(json.loads(session.remaining))
+            for r in remaining:
+                res.append(r)
+            cards = Card.objects.filter(pk__in=res)
+
+
         return render(request, self.template_name, locals())
 
     # This function receives an AJAX POST and updates the session and answer
     # ratio of the card.
-    # A touch of security through obscurity here.
-    # Ugly hack, fix later.
-    def post(self, request, card_id, session_id, is_last):
+    def post(self, request, card_id, session_id):
         session = Session.objects.get(pk=session_id)
-        if request.user != session.user or not session.active:
+        if (request.user != session.user) or (session.remaining == None):
             return HttpResponse("Skamm!")
         card = Card.objects.get(pk=card_id)
         card.asked += 1
         ans = request.POST.get("svar")
+        remaining = request.POST.get("remaining")
 
-        try:
-            answer = Answers.objects.get(session=session, card=card)
-        except Answers.DoesNotExist:
-            answer = Answers(**{'session': session, 'card': card})
-            if ans == "rangt":
-                answer.right = False
-            answer.save()
-            session.card = card
+        res = {card_id: (ans == "rett")}
+        if not session.log:
+            session.log = json.dumps([res])
+        else:
+            svor = json.loads(session.log)
+            svor.append(res)
+            session.log = json.dumps(svor)
    
         if ans == "rangt":
             card.wrong +=1
             
         card.save()
+        session.remaining = json.dumps(remaining)
 
-        if is_last == '1':
+        if session.remaining == "\"[]\"":
             session.active = False
         session.save()
         return HttpResponse()
@@ -177,11 +169,17 @@ def togglePublic(request, deck_id, public_status):
             deck.public = False
         else:
             deck.public = True
-        print(deck.public)
+
         deck.save()
         return HttpResponse()
     else:
         return HttpResponse()
+
+@login_required
+def sessions_for_deck(request, deck_id):
+    sessions = Session.objects.filter(user=request.user, deck=deck_id, active=False)
+    sessions = serializers.serialize('json', sessions)
+    return HttpResponse(sessions)
 
 class edit_card(LoginRequiredMixin, View):
     def post(self, request, card_id=None):

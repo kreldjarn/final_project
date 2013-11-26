@@ -36,6 +36,17 @@ function showCards()
     console.log("Show cards");
 }
 
+$('#yfirlit').click(function(e)
+{
+    $.ajax({
+        type: "GET",
+        url: "/sessions/" + deck.id + "/",
+        success: function(data) {
+            console.log(data);
+        }
+    });
+});
+
 // Færum þetta e-ð annað. Í raun til að rendera
 // template-ið og spýta út í DOM ið eftir því hvernig
 // röðin á kortunum eru í cards[] JS fylkinu
@@ -57,13 +68,20 @@ top_el.delegate(".answer button", "click", function(e) {
     var ans_value = $(this).attr('data-id');
 
     $("#svar").val(ans_value);
+    updateCardView(ans_value);
+    var card_ids = [];
+    for (var i = 0; i < cards.length; i++)
+    {
+        card_ids.push(cards[i].id);
+    }
+    $("#remaining").val(JSON.stringify(card_ids));
 
     $.ajax({
         type: "POST",
-        url: "/" + card_id + "/" + session_id + "/" + cards.length + "/",
+        url: "/" + card_id + "/" + session_id + "/",
         data: $("#hidden").serialize(),
         success: function() {
-            updateCardView(ans_value);
+            showCards();
         },
         error: function() {
         }
@@ -91,9 +109,4 @@ function updateCardView(ans_value)
         cards.push(card);
         color = "red";
     }
-
-    // Add the card, with corresponding color
-    $("#right ul.stack").prepend('<li><div class="stack-card ' + color + '"></div></li>');
-    fixCardStackingOrder()
-    showCards();
 }
