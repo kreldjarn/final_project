@@ -60,6 +60,7 @@ $('#shuffle').click(function(e)
 // Því við viljum geta shufflað/bætt aftast í random röð
 // og svo framvegis, þegar líður á lærdóms-sessjón.
 
+cards = shuffle(cards);
 showCards();
 
 top_el.delegate(".card", "click", function (e) {
