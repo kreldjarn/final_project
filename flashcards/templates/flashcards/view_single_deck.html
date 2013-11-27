@@ -35,7 +35,6 @@
   {% if session.log != None %}
     log = '{{ session.log|escapejs|safe }}';
   {% endif %}
-  console.log(log);
   var deck = {};
   deck.id = '{{ deck.id }}';
   deck.name = '{{ deck.name }}';

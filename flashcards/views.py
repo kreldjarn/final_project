@@ -90,7 +90,7 @@ class deck(LoginRequiredMixin, View):
         ans = request.POST.get("svar")
         remaining = request.POST.get("remaining")
 
-        res = {card_id: (ans == "rett")}
+        res = [card_id, (ans == "rett")]
         if not session.log:
             session.log = json.dumps([res])
         else:

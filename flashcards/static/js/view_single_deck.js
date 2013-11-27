@@ -69,8 +69,26 @@ $('#shuffle').click(function(e)
 // Því við viljum geta shufflað/bætt aftast í random röð
 // og svo framvegis, þegar líður á lærdóms-sessjón.
 
+// SEQUENTIAL LOGIC
+// =======================================
+cards = shuffle(cards);
 showCards();
 
+if (log)
+{
+    log = JSON.parse(log);
+    for (var i in log)
+    {
+        var ans = 'red';
+        if (log[i][1]) ans = 'green';
+        var tmp = single_card_template({ color: ans });
+        $('#right ul.stack').prepend(tmp);
+        fixCardStackingOrder();
+    }
+}
+
+// DELEGATIONS
+// =======================================
 top_el.delegate(".card", "click", function (e) {
     $(this).toggleClass("flip");
 });
@@ -132,6 +150,6 @@ function updateCardView(ans_value)
         cards.push(card);
         color = "red";
     }
-
     $("#right ul.stack").prepend(single_card_template({color: color}));
+    fixCardStackingOrder();
 }
