@@ -3,11 +3,19 @@ var top_el = $("#cards");
 var cards_3d_factor = 10;
 var max_cards_drawn = 16;
 
+// Underscore Templates
+
+var single_card_template = $("script#single-card").html();
+single_card_template = _.template(single_card_template);
+
+var flip_card_template = $('#flip-card').html();
+flip_card_template = _.template(flip_card_template);
+
+// Render main stack
+
 function showCards()
 {
     var html = '<div class="top">';
-    var template = $('#flip-card').html();
-    var compiled = _.template(template);
 
     for(var i = 0; i < cards.length; ++i)
     {
@@ -17,7 +25,7 @@ function showCards()
         var dzoom = 1 - ((i / cards_3d_factor) * 0.2);
         if(dzoom < 0) dzoom = 0;
 
-        var html_string = compiled({
+        var html_string = flip_card_template({
             id: c.id,
             question: c.question,
             answer: c.answer,
@@ -42,6 +50,7 @@ $('#yfirlit').click(function(e)
         type: "GET",
         url: "/sessions/" + deck.id + "/",
         success: function(data) {
+            data = $.parseJSON(data);
             console.log(data);
         }
     });
@@ -74,14 +83,17 @@ top_el.delegate(".answer button", "click", function(e) {
     var card_id = card_el.attr('id');
     var ans_value = $(this).attr('data-id');
 
-    $("#svar").val(ans_value);
+    $("input#svar").val(ans_value);
+
     updateCardView(ans_value);
+
     var card_ids = [];
     for (var i = 0; i < cards.length; i++)
     {
         card_ids.push(cards[i].id);
     }
-    $("#remaining").val(JSON.stringify(card_ids));
+
+    $("input#remaining").val(JSON.stringify(card_ids));
 
     $.ajax({
         type: "POST",
