@@ -45,8 +45,8 @@ class Card(models.Model):
 class Session(models.Model):
     user = models.ForeignKey(User)
     deck = models.ForeignKey(Deck)
-    date = models.DateField(auto_now_add=True)
-    finished = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now_add=True)
+    finished = models.DateTimeField(auto_now=True)
 
     remaining = models.TextField(default="")
     log = models.TextField(default="")

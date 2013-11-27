@@ -56,6 +56,12 @@ $('#yfirlit').click(function(e)
     });
 });
 
+$('#shuffle').click(function(e)
+{
+    cards = shuffle(cards);
+    showCards();
+});
+
 // Færum þetta e-ð annað. Í raun til að rendera
 // template-ið og spýta út í DOM ið eftir því hvernig
 // röðin á kortunum eru í cards[] JS fylkinu
@@ -99,6 +105,11 @@ top_el.delegate(".answer button", "click", function(e) {
         }
     });
 });
+
+function shuffle(deck){
+    for(var j, x, i = deck.length; i; j = Math.floor(Math.random() * i), x = deck[--i], deck[i] = deck[j], deck[j] = x);
+    return deck;
+};
 
 function removeTopCard()
 {
