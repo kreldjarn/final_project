@@ -14,6 +14,11 @@
 	</form>
 
 	<ul id="tilbuin_spjold">
+		<li>
+			<label class="spurn">Spurning</label>
+			<label class="svar">Svar</label>
+			<label class="synil">Sýnilegt</label>
+		</li>
 		{% for c in cards %}
 			{% if c.active %}
 				<li id="{{ c.id }}">

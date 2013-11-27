@@ -59,6 +59,24 @@ form#nytt_spjald
 
 }
 
+	
+	label.spurn, label.svar
+	{
+		font-size: 0.8em;
+		display: block;
+		float: left;
+		width: 35%;
+		margin: 0 20px 0 10px;
+	}
+
+	label.synil
+	{
+		font-size: 0.8em;
+		float: left;
+		display: block;
+		width: 2%;
+	}
+
 	#tilbuin_spjold li form input
 	{
 		border: none;
@@ -77,14 +95,27 @@ form#nytt_spjald
 			background: rgb(255, 255, 255) !important;
 		}
 
+		#tilbuin_spjold li form input[type="checkbox"]
+		{
+			width: 2%;
+			height: 16px;
+			display: inline-block;
+		}
+
+		button.delete
+		{
+			float: right;
+			margin-left: 0px;
+		}
+
 		#tilbuin_spjold li form input[type="checkbox"]:checked
 		{
-			background: red;
+
 		}
 
 		#tilbuin_spjold li form input[type=text]
 		{
-			width: 39%;
+			width: 35%;
 		}
 			#tilbuin_spjold li form input[type=text]:last-child
 			{

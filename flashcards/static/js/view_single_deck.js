@@ -132,4 +132,6 @@ function updateCardView(ans_value)
         cards.push(card);
         color = "red";
     }
+
+    $("#right ul.stack").prepend(single_card_template({color: color}));
 }
