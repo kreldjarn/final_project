@@ -54,6 +54,8 @@ body
 	{
 		float: left;
 		margin: 0 10px 10px 0;
+		height: 100px;
+		display: block;
 	}
 
 	ul.stack li
@@ -79,11 +81,15 @@ body
 
 		.stack-button p
 		{
-			font-size: 0.8em;
+			font-size: 0.6em;
 			width: 100%;
 			text-align: center;
 			color: rgb(255, 255, 255);
 			margin: 34px 0 0 0;
+		}
+
+		#main .stack-button p{
+			font-size: 0.6em;
 		}
 
 ul#tilbuin_spjold form
@@ -105,12 +111,13 @@ ul#tilbuin_spjold form
 	.stack-button p
 	{
 		-webkit-transition: 0.2s text-shadow ease-in-out;
+		text-shadow: 0 0 6px rgba(105, 157, 168, 0.6);
 	}
 
 	.stack-button:hover p
 	{
 		-webkit-transition: 0.2s text-shadow ease-in-out;
-		text-shadow: 0 0 6px rgba(105, 157, 168, 0.6);
+		text-shadow: 0 0 6px rgba(105, 157, 168, 0.8);
 	}
 
 	.stack-button li:last-child .stack-card
