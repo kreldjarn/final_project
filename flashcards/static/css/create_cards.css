@@ -87,6 +87,7 @@ form#nytt_spjald
 		padding: 10px;
 		margin: 10px 10px 10px 0;
 		-webkit-transition: 0.2s all ease-in-out;
+		-moz-transition: 0.2s all ease-in-out;
 		outline: none;
 	}
 
@@ -126,5 +127,6 @@ form#nytt_spjald
 		{
 			background: rgb(255, 255, 255);
 			-webkit-transition: 0.2s all ease-in-out;
+			-moz-transition: 0.2s all ease-in-out;
 		}
 

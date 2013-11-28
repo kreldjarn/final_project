@@ -30,7 +30,8 @@ function showCards()
             question: c.question,
             answer: c.answer,
             style: 'z-index: ' + (-1-i) +
-            '; -webkit-transform: scale(' + dzoom + ')',
+            '; -webkit-transform: scale(' + dzoom + ')' +
+            '; -moz-transform: scale(' + dzoom + ')',
             extraClass : 'color' + Math.floor(i/2)
         });
 
@@ -41,7 +42,6 @@ function showCards()
     html += '</div>';
 
     $("section#cards").html(html);
-    console.log("Show cards");
 }
 
 $('#yfirlit').click(function(e)
@@ -117,7 +117,6 @@ top_el.delegate(".answer button", "click", function(e) {
         url: "/" + card_id + "/" + session_id + "/",
         data: $("#hidden").serialize(),
         success: function() {
-            showCards();
         },
         error: function() {
         }
@@ -150,6 +149,8 @@ function updateCardView(ans_value)
         cards.push(card);
         color = "red";
     }
+    showCards();
     $("#right ul.stack").prepend(single_card_template({color: color}));
     fixCardStackingOrder();
+    
 }
