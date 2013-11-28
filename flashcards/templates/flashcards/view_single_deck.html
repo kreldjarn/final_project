@@ -5,7 +5,6 @@
 
 {% block meginmal %}
   <h1>{{ deck.name }}</h1>
-    <a id="shuffle" class="button">Stokka</a>
     <section id="cards">
       
     </section>
@@ -18,6 +17,7 @@
 
 {% block right %}
 <h2>Þessi stafli</h2>
+    <a id="shuffle" class="button">Stokka</a>
     {% if creator %}
       <a href="/create/{{ deck.id }}/" class="button">Breyta</a>
     {% endif %}

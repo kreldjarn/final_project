@@ -18,6 +18,7 @@ body
 
 #wrap
 {
+	min-width: 430px;
 	margin: 50px auto;
 	width: 1020px;
 	position: absolute;
@@ -275,12 +276,10 @@ button
 
 	button.delete
 	{
-
-		padding: 3px 5px 5px 5px;
-		margin: 17px 0px 10px 10px;
+		margin-top: 18px;
+		height: 20px;
 		vertical-align: center;
 		font-size: 1em;
-		line-height: 0.9em;
 		width: auto;
 		height: auto;
 	}
@@ -300,6 +299,13 @@ button
 	width: 188px;
 	float: left;
 }
+
+	#right a.button
+	{
+		width: 170px;
+		display: block;
+		margin-bottom: 1px;
+	}
 
 #cards
 {
@@ -486,6 +492,8 @@ form
 			background: rgb(95, 147, 158);
 		}
 
+
+
 p.signup_now
 {
 	text-align: center;
@@ -545,11 +553,60 @@ h2
 
 @media screen and (max-width: 1020px)
 {
-	#wrap {
-		width: 100%;
+	#wrap
+	{
+		width: 800px;
 	}
+
+	nav .wrap
+	{
+		width: 800px;
+	}
+
+	#stacks, #right
+	{
+		width: 185px;
+	}
+
+	#main
+	{
+		width: 390px;
+	}
+}
+
+@media screen and (max-width: 800px)
+{
+	#wrap
+	{
+		width: 90%;
+	}
+
 	#stacks, #main, #right{
 		float: none;
 		width: 100%;
+		text-align: left;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		padding-bottom: 20px;
+		margin-bottom: 20px;
 	}
+
+	#stacks .stack-button
+	{
+		float: left;
+		margin: 0px 0px 20px 20px;
+	}
+
+	nav .wrap
+	{
+		width: 100%;
+	}
+}
+
+#stacks:after, #main:after
+{
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	height: 0px;
+	clear: both;
 }

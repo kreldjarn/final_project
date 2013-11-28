@@ -4,6 +4,7 @@
 
 {% block meginmal %}
 <ul>
+    <h1>Allir staflar</h1>
 	{% for d in decks %}
 	{% if d.public %}
 		<a class="stack-button" id="{{ d.id }}" href="/{{ d.id }}">
