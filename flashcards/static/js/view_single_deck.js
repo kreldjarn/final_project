@@ -30,7 +30,8 @@ function showCards()
             question: c.question,
             answer: c.answer,
             style: 'z-index: ' + (-1-i) +
-            '; -webkit-transform: scale(' + dzoom + ')',
+            '; -webkit-transform: scale(' + dzoom + ')' +
+            '; -moz-transform: scale(' + dzoom + ')',
             extraClass : 'color' + Math.floor(i/2)
         });
 
