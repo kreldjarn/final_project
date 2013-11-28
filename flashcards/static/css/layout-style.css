@@ -1,4 +1,4 @@
-::selection
+::-webkit-selection
 {
 	background: rgb(105, 157, 168);
 }
@@ -74,7 +74,7 @@ body
 			left: 0;
 			height: 30px;
 			display: block;
-			width: calc(100%-2px);
+			width: 100%;
 			box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 			-webkit-transform-origin: 50% 100%;
 			-webkit-transform: perspective(30px) rotateX(22deg);
@@ -278,7 +278,6 @@ button
 	{
 		margin-top: 18px;
 		height: 20px;
-		vertical-align: center;
 		font-size: 1em;
 		width: auto;
 		height: auto;
@@ -462,7 +461,7 @@ form
 	form input[type=text], form input[type=password]
 	{
 		background: rgb(255, 255, 255);
-		width: calc(100% - 20px);
+		width: 220px;
 		font-size: 1.5em;
 		border: none;
 		padding: 10px;
