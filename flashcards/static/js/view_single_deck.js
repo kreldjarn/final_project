@@ -2,6 +2,7 @@ var top_el = $("#cards");
 
 var cards_3d_factor = 10;
 var max_cards_drawn = 16;
+var currentColor = 'green';
 
 // Underscore Templates
 
@@ -41,7 +42,6 @@ function showCards()
     html += '</div>';
 
     $("section#cards").html(html);
-    console.log("Show cards");
 }
 
 $('#yfirlit').click(function(e)
@@ -118,6 +118,8 @@ top_el.delegate(".answer button", "click", function(e) {
         data: $("#hidden").serialize(),
         success: function() {
             showCards();
+            $("#right ul.stack").prepend(single_card_template({color: currentColor}));
+            fixCardStackingOrder();
         },
         error: function() {
         }
@@ -143,13 +145,12 @@ function removeTopCard()
 function updateCardView(ans_value)
 {
     var card = removeTopCard();
-    var color = "green";
+    currentColor = "green";
 
     if(ans_value === "rangt")
     {
         cards.push(card);
-        color = "red";
+        currentColor = "red";
     }
-    $("#right ul.stack").prepend(single_card_template({color: color}));
-    fixCardStackingOrder();
+    
 }
