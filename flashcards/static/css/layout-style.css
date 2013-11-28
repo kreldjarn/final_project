@@ -333,6 +333,11 @@ button
 	height: 220px;
 }
 
+
+	form input#nafn
+	{
+		width: calc(100% - 20px);	
+	}
 	#cards .container .card
 	{
 		width: 396px;
@@ -479,13 +484,17 @@ form
 	form input[type=text], form input[type=password]
 	{
 		background: rgb(255, 255, 255);
-		width: 220px;
 		font-size: 1.5em;
 		border: none;
 		padding: 10px;
 		font-family: inherit;
 		margin: 0 0 10px 0;
 		outline: none;
+	}
+
+	#nafn
+	{
+		width: 100%;
 	}
 
 	form input[type=submit]

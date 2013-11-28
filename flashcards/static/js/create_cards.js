@@ -195,7 +195,7 @@ function clearForm(el) {
 
 function prependAddedCard(data)
 {
-	var el = $('#tilbuin_spjold')
+	var el = $('#tilbuin_spjold li.legend')
 
 	var id = data[0].pk;
 	var question = data[0].fields.question;
@@ -217,5 +217,5 @@ function prependAddedCard(data)
 	var compiled = _.template(template);
 	var html = compiled(entry);
 
-	el.prepend(html);
+	el.after(html);
 }
